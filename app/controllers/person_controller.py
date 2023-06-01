@@ -29,9 +29,6 @@ def login_user():
 def user_dash():
     if 'user_id' not in session:
         return redirect("/")
-    # not using method yet
-    # all_recipes=recipe_model.Recipe.get_all_recipes()
-    # current_logged_in_user = session['user_name']
     print("SESSION DASH ===>", session)
     recipes_by_user = recipe_model.Recipe.get_all_recipes_by_user()
     return render_template("dashboard.html", recipes_by_user=recipes_by_user)

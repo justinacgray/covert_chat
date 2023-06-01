@@ -9,21 +9,21 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 
 class Person:
-    db = "recipes_db"
+    db = chat_db
     
-    def __init__(self, user):
-        self.id = user['id']
-        self.first_name = user['first_name']
-        self.last_name = user['last_name']
-        self.age = user['age']
-        self.email = user['email']
-        self.password = user['password']
-        self.created_at = user['created_at']
-        self.updated_at = user['updated_at']
-        self.recipes = []
+    def __init__(self, p_data):
+        self.id = p_data['id']
+        self.first_name = p_data['first_name']
+        self.last_name = p_data['last_name']
+        self.age = p_data['age']
+        self.email = p_data['email']
+        self.password = p_data['password']
+        self.created_at = p_data['created_at']
+        self.updated_at = p_data['updated_at']
+
         
     def __repr__(self) -> str:
-        return f"USER ===> : {self.first_name, self.last_name, self.age, self.email, self.password, self.created_at, self.updated_at}"
+        return f"NEW USER ===> : {self.first_name, self.last_name, self.age, self.email, self.password, self.created_at, self.updated_at}"
     
     # create user 
     @classmethod
