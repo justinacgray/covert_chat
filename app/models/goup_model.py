@@ -1,6 +1,6 @@
 from app.config.mysqlconnection import connectToMySQL
 
-class ChatRoom:
+class Group:
     db = chat_db
 
     def __init__(self, room_data):
@@ -16,5 +16,8 @@ class ChatRoom:
         pass
     
 
+
+class GroupMembers:
+    pass
 
 # should I include messages_id?
