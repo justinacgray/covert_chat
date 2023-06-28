@@ -10,14 +10,14 @@ def index():
     return render_template("login_reg.html")
 
 
-@APP.route("/users/register", methods=["POST"])
+@APP.route("/register", methods=["POST"])
 def register_user():
     if not person_model.Person.create_user(request.form):
         return redirect("/")
     return redirect("/users/dashboard")
 
 
-@APP.route("/users/login", methods=["POST"])
+@APP.route("/login", methods=["POST"])
 def login_user():
     if person_model.Person.valid_login_data(request.form):
         return redirect("/users/dashboard")
@@ -25,7 +25,7 @@ def login_user():
     return redirect("/")
 
 
-@APP.route("/users/dashboard")
+@APP.route("/dashboard")
 def user_dash():
     if 'user_id' not in session:
         return redirect("/")
@@ -34,7 +34,7 @@ def user_dash():
     return render_template("dashboard.html", recipes_by_user=recipes_by_user)
 
 
-@APP.route("/users/logout")
+@APP.route("/logout")
 def logout():
     session.clear()
     return redirect("/")

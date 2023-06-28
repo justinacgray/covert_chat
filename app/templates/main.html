@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link
+    rel="stylesheet"
+    href="{{url_for('static',filename='css/main.css')}}"
+    />
+</head>
+<body>
+
+    
+    <header class="hero has-background-black">
+        <div class="hero-body">
+            <section class="container is-flex is-align-items-center is-justify-content-center ">
+                <figure class="image is-96x96 is-rounded ">
+                    <img src="../static/images/logo-leaf.png" alt=""> Recipe App
+                </figure>
+                {% if session.user_id %}
+                <a href="/users/logout">
+                    <button class="button has-text-primary">Log Out</button>
+                </a>
+    
+                {% endif %}
+            </section>
+        </div>
+    </header>
+    {% block content %}
+    {% endblock content %}
+    
+</body>
+</html>

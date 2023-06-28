@@ -12,9 +12,10 @@ class Person:
     db = chat_db
     
     def __init__(self, p_data):
-        self.id = p_data['id']
+        self.user_id = p_data['user_id']
         self.first_name = p_data['first_name']
         self.last_name = p_data['last_name']
+        self.username = p_data['username']
         self.age = p_data['age']
         self.email = p_data['email']
         self.password = p_data['password']
@@ -35,7 +36,7 @@ class Person:
         # why only parsing email and password?
         parsed_data = cls.parse_registration_data(data)
         query = """
-            INSERT INTO users (id, first_name, last_name, age, email, password) 
+            INSERT INTO users (user_id, first_name, last_name, age, email, password) 
             VALUES ( %(id)s, %(first_name)s, %(last_name)s, %(age)s, %(email)s, %(password)s )
             ;"""
 
@@ -69,12 +70,13 @@ class Person:
         query = """
         SELECT * 
         FROM users
-        WHERE id = %(id)s
+        WHERE user_id = %(user_id)s
         ;"""
         result= connectToMySQL(cls.db).query_db(query,data)
         print("===> user result ===>", result)
         return result
     
+    # eventually be able to update user profile
     @classmethod
     def update_user(cls):
         pass
@@ -104,7 +106,7 @@ class Person:
         is_valid = True
         
         # checking if email exits and anything the user enters it lowercases
-        current_user = User.get_user_by_email(register_data['email'].lower())
+        current_user = Person.get_user_by_email(register_data['email'].lower())
         print("current user===>", current_user)
     
         if current_user:
@@ -149,17 +151,13 @@ class Person:
         print("completed register validations")
         return is_valid
     
-    # @staticmethod
-    # def random_with_N_digits(n):
-    #     range_start = 10**(n-1)
-    #     range_end = (10**n)-1
-    #     return randint(range_start, range_end)
     
     @staticmethod
     def valid_login_data(login_data):
         is_valid = True
         
-        user = User.get_user_by_email(login_data['email'].lower())
+        # add logic to login either email or username
+        user = Person.get_user_by_email(login_data['email'].lower())
         if user:
             if bcrypt.check_password_hash(user.password, login_data['password']):
                 session['user_id'] = user.id
@@ -185,12 +183,6 @@ class Person:
 
     @staticmethod
     def parse_registration_data(data):
-        # ImmutableMultiDict' objects are immutable ERROR because we assigned data 
-        # assigned data to parsed data which is immutable because it's a location in memory which is an immutable object
-        #can't change the point in memory ~~ Don't do it this way
-        # parsed_data = data
-        # parsed_data['email'] = data['email'].lower()
-        # parsed_data['password'] = bcrypt.generate_password_hash(data['password'])
         parsed_data = {
             'id': uuid4().hex,
             'first_name' : data['first_name'],
@@ -199,14 +191,6 @@ class Person:
             'email' : data['email'].lower(), 
             'password' : bcrypt.generate_password_hash(data['password'])
         }
-        # parsed_data = {}
-        # parsed_data['first_name'] = data['first_name']
-        # parsed_data['last_name'] = data['last_name']
-        # parsed_data['age'] = data['age']
-        # parsed_data['email'] = data['email'].lower()
-        # parsed_data['password'] = bcrypt.generate_password_hash(data['password'])
-        # return parsed_data
-
         print("$$$$$$$$$$$$$ parsed user data ===>" , parsed_data)
         return parsed_data 
 
@@ -217,4 +201,4 @@ class Person:
 
 
 
-print("inside usermodel")
+print("inside person model")

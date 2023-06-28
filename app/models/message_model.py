@@ -15,6 +15,27 @@ class Message:
     def hello(cls):
         pass
     
+    @classmethod
+    def create_message(cls):
+        pass
+    
+    @classmethod
+    def read_one_message(cls):
+        pass
+    
+    @classmethod
+    def read_all_messages(cls):
+        pass
+    
+    @classmethod
+    def update_message(cls):
+        pass
+    
+    @classmethod
+    def delete_message(cls):
+        pass
+    
+    
     
     
 # should I include room id?

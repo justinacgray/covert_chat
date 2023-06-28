@@ -15,6 +15,23 @@ class Group:
     def hello(cls):
         pass
     
+    @classmethod
+    def create_group(cls):
+        pass
+    
+
+    @classmethod
+    def read_all_messages_in_group(cls):
+        pass
+    
+    @classmethod
+    def update_message_in_group(cls):
+        pass
+    
+    @classmethod
+    def delete_message_in_group(cls):
+        pass
+    
 
 
 class GroupMembers:
