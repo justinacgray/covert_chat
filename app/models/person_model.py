@@ -24,7 +24,7 @@ class Person:
 
         
     def __repr__(self) -> str:
-        return f"NEW USER ===> : {self.first_name, self.last_name, self.age, self.email, self.password, self.created_at, self.updated_at}"
+        return f"NEW USER ===> : {self.first_name, self.last_name, self.email}"
     
     # create user 
     @classmethod

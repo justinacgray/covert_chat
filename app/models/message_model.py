@@ -11,9 +11,8 @@ class Message:
         self.created_at = ms_data['created_at']
         self.updated_at = ms_data['updated_at']
 
-    @classmethod
-    def hello(cls):
-        pass
+    def __repr__(self) -> str:
+        return f'REPR Method {self.message_id}, {self.sender_person_id}, {self.receiver_person_id}'
     
     @classmethod
     def create_message(cls):
