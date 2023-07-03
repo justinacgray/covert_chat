@@ -1,7 +1,7 @@
 from app.config.mysqlconnection import connectToMySQL
 
 class Group:
-    db = chat_db
+    db = 'chat_db'
 
     def __init__(self, room_data):
         self.room_id = room_data['room_id']

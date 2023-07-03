@@ -15,7 +15,7 @@
             <div class="columns is-flex is-justify-content-center">
 
                 
-                <form action="/users/register" method="post" class="column is-one-third">
+                <form action="/register" method="post" class="column is-one-third">
                     <div class="notification has-background-success-dark">
                         <h2 class="is-size-4">Register</h2>
                         <div class="field">
@@ -60,6 +60,16 @@
                             </div>
                         </div>
                         <div class="field">
+                            <label class="label">Username</label>
+                            <div class="control">
+                                <input 
+                                class="input" 
+                                type="text"
+                                name="username" 
+                                placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="field">
                             <label class="label">Password</label>
                             <div class="control">
                                 <input 
@@ -91,7 +101,7 @@
                 </form>
 
                 <!-- LOGIN -->
-                <form action="/users/login" method="post" class="column is-one-third">
+                <form action="/login" method="post" class="column is-one-third">
                     <div class="notification has-background-success-dark">
 
                         <h2 class="is-size-4">Login</h2>

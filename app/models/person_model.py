@@ -9,7 +9,7 @@ EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
 
 class Person:
-    db = chat_db
+    db = 'chat_db'
     
     def __init__(self, p_data):
         self.user_id = p_data['user_id']
@@ -36,7 +36,7 @@ class Person:
         # why only parsing email and password?
         parsed_data = cls.parse_registration_data(data)
         query = """
-            INSERT INTO users (user_id, first_name, last_name, age, email, password) 
+            INSERT INTO persons (user_id, first_name, last_name, age, email, password) 
             VALUES ( %(id)s, %(first_name)s, %(last_name)s, %(age)s, %(email)s, %(password)s )
             ;"""
 
@@ -54,7 +54,7 @@ class Person:
     @classmethod
     def get_all_users(cls):
         query = """
-        SELECT * FROM users
+        SELECT * FROM persons
         ;"""
         result = connectToMySQL(cls.db).query_db(query)
         print("********result *********", result)
@@ -90,7 +90,7 @@ class Person:
         data = {"email" : email}
         query= """
         SELECT * 
-        FROM users 
+        FROM persons
         WHERE email = %(email)s
         ;"""
         result = MySQLConnection(cls.db).query_db(query, data)

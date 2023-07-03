@@ -1,5 +1,5 @@
 from app import APP
-from app.controllers import users_controllers
+from app.controllers import person_controllers
 
 
 

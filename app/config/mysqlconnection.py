@@ -6,6 +6,7 @@ HOST=os.environ.get('DB_HOST')
 DB_USER=os.environ.get('DB_USERNAME')
 DB_PASSWORD=os.environ.get('DB_PASSWORD')
 
+print("HOST", DB_PASSWORD, DB_USER)
 
 # this class will give us an instance of a connection to our database
 class MySQLConnection:
