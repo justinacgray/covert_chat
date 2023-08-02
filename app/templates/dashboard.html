@@ -25,6 +25,18 @@
         </aside>
 
         <aside class="current-chat">
+            <form action="" class="msger-inputarea" method="post">
+                <select name="receiver_person_id">
+                    <option value="">Choose an User</option>
+
+                    {% for user in all_users%}
+                    <option value="{{user.user_id}}">{{user.first_name}}</option>
+                    {% endfor%}
+
+                </select>
+                <input type="text" class="msger-input" name="content" placeholder="Enter your message...">
+                <button type="submit" class="msger-send-btn">Send</button>
+            </form>
             <div class="logged-in-user">
                 user 1 chat bubble                 
             </div>
@@ -34,10 +46,6 @@
                 
             </div>
 
-            <form class="msger-inputarea" method="post">
-                <input type="text" class="msger-input" placeholder="Enter your message...">
-                <button type="submit" class="msger-send-btn">Send</button>
-            </form>
         </aside>
     </main>
 

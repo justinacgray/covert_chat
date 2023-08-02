@@ -23,12 +23,7 @@ def login_user():
     return redirect("/")
 
 
-@APP.route("/dashboard")
-def user_dash():
-    if 'user_id' not in session:
-        return redirect("/")
-    print("SESSION DASH ===>", session)
-    return render_template("dashboard.html")
+
 
 
 @APP.route("/logout")

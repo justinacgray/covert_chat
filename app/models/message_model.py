@@ -1,5 +1,7 @@
 from app.config.mysqlconnection import connectToMySQL
 from uuid import uuid4
+import random
+from flask import flash, session
 
 class Message:
     db = 'chat_db'
@@ -18,12 +20,18 @@ class Message:
     
     # use sql alchemy to CRUD
     @classmethod
-    def create_message(cls):
-        # query ='''
-        #         INSERT into messages (message_id, content, ) 
-        #         VALUES ( %(message_id)s, %(content)s, %()s, %()s, %()s, %()s )
-        #         ;
-        #         '''
+    def create_message(cls, msg_data):
+        if not cls.valid_message(msg_data):
+            return False
+        parsed_data = cls.parse_msg_data(msg_data)
+        query ='''
+                INSERT into messages (message_id, content, receiver_user_id, sender_user_id) 
+                VALUES ( %(message_id)s, %(content)s, %(receiver_user_id)s, %(sender_user_id)s)
+                ;'''
+        message_id = connectToMySQL(cls.db).query_db(query, parsed_data)
+        if str(message_id) == 'False':
+            return False
+        print("message created id", message_id)
         return True
     
     @classmethod
@@ -42,17 +50,31 @@ class Message:
     def delete_message(cls):
         pass
     
+    
     # parse message_id
     @staticmethod
-    def parse_id_data(data):
+    def parse_msg_data(msg_data):
+        print("<----- MSG data ---->", msg_data)
         parsed_data = {
-            'id': uuid4().hex
+            'message_id': random.getrandbits(22),
+            'content' : msg_data['content'],
+            'sender_person_id' : session['user_id'],
+            'receiver_user_id' : msg_data['receiver_person_id'],
         }
-        print("$$$$$$$$$$$$$ parsed user data ===>" , parsed_data)
+        
         return parsed_data
     
     @staticmethod
-    def valid_message(data):
-        pass
+    def valid_message(msg_content):
+        is_valid = True
+        
+        if len(msg_content['content'] == 0):
+            flash("content can't empty")
+            is_valid = False
+            
+        return is_valid
+    
+    
+    
     
 # should I include room id?
