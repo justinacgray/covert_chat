@@ -1,7 +1,47 @@
-{% extends "START/header.html" %}
+
+{% extends "main.html" %}
 
 {% block content %}
-<body class="body" style="background-color:#f23d49">
-    <p> TEST</p> <!-- for example -->
-</body>
+
+
+
+<section class="main-dash">
+
+    <header class="msger-header">
+        <div class="msger-header-title">
+            <i class="fas fa-comment-alt"></i> CovertChat
+        </div>
+
+    </header>
+
+    <main class="inner-container">
+        <aside class="active-chat-list">
+            <ul>
+                <li>list</li>
+                <li>of</li>
+                <li>active chats</li>
+            </ul>
+
+        </aside>
+
+        <aside class="current-chat">
+            <div class="logged-in-user">
+                user 1 chat bubble                 
+            </div>
+            
+            <div class="other-user">
+                user 2 chat bubble
+                
+            </div>
+
+            <form class="msger-inputarea" method="post">
+                <input type="text" class="msger-input" placeholder="Enter your message...">
+                <button type="submit" class="msger-send-btn">Send</button>
+            </form>
+        </aside>
+    </main>
+
+
+</section>
+
 {% endblock %}

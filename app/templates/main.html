@@ -9,29 +9,31 @@
             href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link
     rel="stylesheet"
-    href="{{url_for('static',filename='css/main.css')}}"
+    href="{{url_for('static',filename='css/dash.css')}}"
     />
 </head>
 <body>
-
-    
     <header class="hero has-background-black">
         <div class="hero-body">
             <section class="container is-flex is-align-items-center is-justify-content-center ">
-                <figure class="image is-96x96 is-rounded ">
-                    <img src="../static/images/logo-leaf.png" alt=""> Chat App
-                </figure>
                 {% if session.user_id %}
-                <a href="/logout">
-                    <button class="button has-text-primary">Log Out</button>
-                </a>
+                <header>
+                    <nav>
+                        <a class="button has-text-primary" href="#">Home</a>
+                        <a class="button has-text-primary" href="#">Create a group chat</a>
+                        <a class="button has-text-primary" href="/logout">Log Out</a>
+                    </nav>
+                </header>
     
                 {% endif %}
             </section>
         </div>
     </header>
+    block header starts here
     {% block content %}
+    can't see content inside here
     {% endblock content %}
+    can see part after blocked content
     
 </body>
 </html>

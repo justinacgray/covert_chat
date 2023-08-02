@@ -160,7 +160,7 @@ class Person:
         user = Person.get_user_by_email(login_data['email'].lower())
         if user:
             if bcrypt.check_password_hash(user.password, login_data['password']):
-                session['user_id'] = user.id
+                session['user_id'] = user.user_id
                 session['user_name'] = user.first_name              
                 return True
             else:
