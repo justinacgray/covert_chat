@@ -3,6 +3,7 @@ from uuid import uuid4
 from app import APP
 from flask import flash, session
 import re
+import random
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(APP)
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -36,8 +37,8 @@ class Person:
         # why only parsing email and password?
         parsed_data = cls.parse_registration_data(data)
         query = """
-            INSERT INTO persons (user_id, first_name, last_name, age, email, password) 
-            VALUES ( %(id)s, %(first_name)s, %(last_name)s, %(age)s, %(email)s, %(password)s )
+            INSERT INTO persons (user_id, first_name, last_name, username, age, email, password) 
+            VALUES ( %(id)s, %(first_name)s, %(last_name)s, %(username)s, %(age)s, %(email)s, %(password)s )
             ;"""
 
         user_id = connectToMySQL(cls.db).query_db(query, parsed_data)
@@ -184,9 +185,11 @@ class Person:
     @staticmethod
     def parse_registration_data(data):
         parsed_data = {
-            'id': uuid4().hex,
+            # 'id': uuid4().hex,
+            'id' : random.getrandbits(22),
             'first_name' : data['first_name'],
             'last_name' : data['last_name'],
+            'username' : data['username'],
             'age' : data['age'],
             'email' : data['email'].lower(), 
             'password' : bcrypt.generate_password_hash(data['password'])

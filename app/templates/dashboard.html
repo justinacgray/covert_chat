@@ -25,9 +25,16 @@
         </aside>
 
         <aside class="current-chat">
-            <form action="" class="msger-inputarea" method="post">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p> {{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith%}
+            <form action="/create-message" class="msger-inputarea" method="post">
                 <select name="receiver_person_id">
-                    <option value="">Choose an User</option>
+                    <option value="0">Choose an User</option>
 
                     {% for user in all_users%}
                     <option value="{{user.user_id}}">{{user.first_name}}</option>

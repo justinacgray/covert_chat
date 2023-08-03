@@ -66,9 +66,16 @@ class Message:
     
     @staticmethod
     def valid_message(msg_content):
-        is_valid = True
+        print("msg content", msg_content)
+        print("len", len(msg_content['receiver_person_id']))
+        print("receiver person", msg_content['receiver_person_id'])
         
-        if len(msg_content['content'] == 0):
+        is_valid = True
+        if int(msg_content['receiver_user_id']) == 0:
+            flash("please choose a person to message")
+            is_valid = False
+        # == 0 must go OUTSIDE of the len function
+        if len(msg_content['content']) == 0:
             flash("content can't empty")
             is_valid = False
             
