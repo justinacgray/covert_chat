@@ -9,17 +9,19 @@
 
     <header class="msger-header">
         <div class="msger-header-title">
-            <i class="fas fa-comment-alt"></i> CovertChat
-        </div>
+            <i class="fas fa-comment-alt"></i> CovertChat 
 
+        </div>
+        
     </header>
+    <h2>{{session['user_name']}} {{session['user_id']}}</h2>
 
     <main class="inner-container">
         <aside class="active-chat-list">
             <ul>
-                <li>list</li>
-                <li>of</li>
-                <li>active chats</li>
+                {% for person in chat_list %}
+                    <li>{{person.sender_obj.first_name}}</li>
+                {% endfor %}
             </ul>
 
         </aside>
@@ -44,14 +46,19 @@
                 <input type="text" class="msger-input" name="content" placeholder="Enter your message...">
                 <button type="submit" class="msger-send-btn">Send</button>
             </form>
+        
+            
             <div class="logged-in-user">
                 user 1 chat bubble                 
             </div>
+            
+
             
             <div class="other-user">
                 user 2 chat bubble
                 
             </div>
+            
 
         </aside>
     </main>

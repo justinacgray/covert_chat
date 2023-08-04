@@ -22,6 +22,7 @@ class Person:
         self.password = p_data['password']
         self.created_at = p_data['created_at']
         self.updated_at = p_data['updated_at']
+        self.active_chats = []
 
         
     def __repr__(self) -> str:

@@ -8,7 +8,7 @@ def user_dash():
     if 'user_id' not in session:
         return redirect("/")
     print("SESSION DASH ===>", session)
-    return render_template("dashboard.html", all_users = person_model.Person.get_all_users())
+    return render_template("dashboard.html", all_users = person_model.Person.get_all_users(), chat_list = message_model.Message.logged_in_user_active_chats(session['user_id']))
 
 
 
@@ -19,7 +19,7 @@ def new_msg():
         return redirect('/dashboard')
     message_dict = {
         'content' : request.form['content'],
-        'receiver_user_id' : request.form['receiver_person_id'],
+        'receiver_person_id' : request.form['receiver_person_id'],
         'sender_user_id' : session['user_id']
     }
     
