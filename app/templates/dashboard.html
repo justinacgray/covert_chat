@@ -20,7 +20,14 @@
         <aside class="active-chat-list">
             <ul>
                 {% for person in chat_list %}
-                    <li>{{person.sender_obj.first_name}}</li>
+
+                {% if session['user_id'] ==  person.sender_obj.user_id %}
+                    <li>{{person.receiver_obj.username}}</li>
+
+                {% elif session['user_id'] ==  person.receiver_obj.user_id %}
+                    <li>{{person.sender_obj.username}}</li>
+                    {% endif%}
+                    
                 {% endfor %}
             </ul>
 

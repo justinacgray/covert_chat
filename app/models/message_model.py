@@ -20,7 +20,7 @@ class Message:
         self.receiver_obj = None
         
     def __repr__(self) -> str:
-        return f'REPR Method {self.message_id}, {self.sender_person_id}, {self.receiver_person_id}'
+        return f'REPR MESSAGE Method id: {self.message_id}, sender:{self.sender_person_id}, receiver:{self.receiver_person_id}'
     
     # use sql alchemy to CRUD
     @classmethod
@@ -90,11 +90,16 @@ class Message:
             'user_id' : user_id
         }
         query = '''
-            select * 
-            from messages
-            left join persons
-            on messages.sender_user_id = persons.user_id
-            where persons.user_id = %(user_id)s;
+            SELECT m.*,
+            sender.username AS sender_name,
+            receiver.username AS receiver_name
+            FROM messages AS m
+            LEFT JOIN persons AS sender ON m.sender_user_id = sender.user_id
+            LEFT JOIN persons AS receiver ON m.receiver_user_id = receiver.user_id
+            WHERE sender.user_id = %(user_id)s OR receiver.user_id = %(user_id)s
+            -- GROUP BY m.receiver_user_id, m.sender_user_id
+        
+            ;
         '''
         results = MySQLConnection(cls.db).query_db(query, user_data)
         print("USER chats --->", user_data)
@@ -102,19 +107,32 @@ class Message:
         chat_list = []
         for row in results:
             messages = cls(row)
-            user_data = {
-                'user_id' : row['user_id'],
-                'first_name' : row['first_name'],
-                'last_name': row['last_name'],
-                'username' : row['username'],
-                'age' : row['age'],
-                'email' : row['email'],
-                'password' : row['password'],
+            sender_user_data = {
+                'user_id' : row['sender_user_id'],
+                'first_name' : None,
+                'last_name': None,
+                'username' : row['sender_name'],
+                'age' : None,
+                'email' : None,
+                'password' : None,
                 'created_at' : row['created_at'],
                 'updated_at' : row['updated_at']
             }
-            one_person = person_model.Person(user_data)
-            messages.sender_obj = one_person
+            receiver_user_data = {
+                'user_id' : row['receiver_user_id'],
+                'first_name' : None,
+                'last_name': None,
+                'username' : row['receiver_name'],
+                'age' : None,
+                'email' : None,
+                'password' : None,
+                'created_at' : row['created_at'],
+                'updated_at' : row['updated_at']
+            }
+            sender_person = person_model.Person(sender_user_data)
+            receiver_person = person_model.Person(receiver_user_data)
+            messages.sender_obj = sender_person
+            messages.receiver_obj = receiver_person
             chat_list.append(messages)
         print("$$$$$$$ chat list $$$$$", chat_list)
         return chat_list
