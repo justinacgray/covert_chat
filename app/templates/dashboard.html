@@ -19,15 +19,11 @@
     <main class="inner-container">
         <aside class="active-chat-list">
             <ul>
+                
                 {% for person in chat_list %}
-
-                {% if session['user_id'] ==  person.sender_obj.user_id %}
-                    <li>{{person.receiver_obj.username}}</li>
-
-                {% elif session['user_id'] ==  person.receiver_obj.user_id %}
-                    <li>{{person.sender_obj.username}}</li>
-                    {% endif%}
-                    
+                    <li>
+                    <a href="/dm/{{person.user_id}}">{{person.username}}</a>
+                </li>
                 {% endfor %}
             </ul>
 
@@ -54,17 +50,11 @@
                 <button type="submit" class="msger-send-btn">Send</button>
             </form>
         
-            
-            <div class="logged-in-user">
-                user 1 chat bubble                 
+            <!-- include allows you to use a template in another template -->
+            <div>
+                {% include 'direct_messages.html' %}              
             </div>
             
-
-            
-            <div class="other-user">
-                user 2 chat bubble
-                
-            </div>
             
 
         </aside>

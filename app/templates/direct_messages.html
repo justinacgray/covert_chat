@@ -1,7 +1,49 @@
-{% extends "START/header.html" %}
 
-{% block content %}
-<body class="body" style="background-color:#f23d49">
-    <p> TEST</p> <!-- for example -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link 
+    href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
+    rel="stylesheet"  type='text/css'>
+</head>
+<body>
+    <div>
+        {% if message_hist %}
+            {% for message in message_hist %}
+                {% if session['user_id'] == message.sender_person_id %}
+                <div style="background-color: rgb(233, 207, 233)">
+                    {{message.content}} 
+                    {{message.updated_at}} ||
+                    {{message.sender_person_id}} ||
+                    {{message.receiver_person_id}}
+                    <span class="fa fa-pencil" title="Edit"><span/> 
+                </div>
+                {% else %}
+                <div style="background-color: rgb(178, 243, 178)">
+                    {{message.content}} 
+                    {{message.updated_at}} ||
+                    {{message.sender_person_id}} ||
+                    {{message.receiver_person_id}}
+                    <span class="fa fa-pencil" title="Edit"><span/> 
+                </div>
+                
+                {% endif %}
+            {% endfor %}
+
+            
+            {% else %}
+            <p> NO MESSAGES </p>
+
+            {% endif %}
+            
+
+    </div>
+    
 </body>
-{% endblock %}
+</html>
+

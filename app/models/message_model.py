@@ -41,9 +41,33 @@ class Message:
         pass
     
     @classmethod
-    def read_all_messages(cls):
-        pass
-    
+    def read_all_messages_by_receiver(cls, sender_id, receiver_id):
+                    # left side 'user_id' needs to match %(user_id)s
+        user_data_dict = {
+                        'user_id' : sender_id,
+                        'other_user_id' : receiver_id
+                        }
+        all_messages = []
+        query = '''
+            select m.*,
+            sender.username AS sender_name,
+            receiver.username AS receiver_name
+            FROM messages AS m
+            LEFT JOIN persons AS sender ON m.sender_user_id = sender.user_id
+            LEFT JOIN persons AS receiver ON m.receiver_user_id = receiver.user_id
+            WHERE (m.sender_user_id = %(user_id)s  and m.receiver_user_id = %(other_user_id)s )
+            or (m.sender_user_id = %(other_user_id)s  and m.receiver_user_id = %(user_id)s  )
+            ;
+        '''
+        results = MySQLConnection(cls.db).query_db(query, user_data_dict)
+        print("results FROM ALL MESSAGES --->", results)
+        for row in results:
+            one_message = cls(row)
+            all_messages.append(one_message)
+        print("all messages by receiver ----->", all_messages)
+        return all_messages
+        
+        
     @classmethod
     def update_message(cls):
         pass
@@ -90,15 +114,12 @@ class Message:
             'user_id' : user_id
         }
         query = '''
-            SELECT m.*,
-            sender.username AS sender_name,
-            receiver.username AS receiver_name
-            FROM messages AS m
-            LEFT JOIN persons AS sender ON m.sender_user_id = sender.user_id
-            LEFT JOIN persons AS receiver ON m.receiver_user_id = receiver.user_id
-            WHERE sender.user_id = %(user_id)s OR receiver.user_id = %(user_id)s
-            -- GROUP BY m.receiver_user_id, m.sender_user_id
-        
+            select p.*
+            from persons p
+            join messages m 
+            on (m.sender_user_id = %(user_id)s AND m.receiver_user_id = p.user_id)
+            OR (m.receiver_user_id = %(user_id)s AND m.sender_user_id = p.user_id)
+            group by p.user_id
             ;
         '''
         results = MySQLConnection(cls.db).query_db(query, user_data)
@@ -106,34 +127,7 @@ class Message:
         print("****** RESULTS *****", results)
         chat_list = []
         for row in results:
-            messages = cls(row)
-            sender_user_data = {
-                'user_id' : row['sender_user_id'],
-                'first_name' : None,
-                'last_name': None,
-                'username' : row['sender_name'],
-                'age' : None,
-                'email' : None,
-                'password' : None,
-                'created_at' : row['created_at'],
-                'updated_at' : row['updated_at']
-            }
-            receiver_user_data = {
-                'user_id' : row['receiver_user_id'],
-                'first_name' : None,
-                'last_name': None,
-                'username' : row['receiver_name'],
-                'age' : None,
-                'email' : None,
-                'password' : None,
-                'created_at' : row['created_at'],
-                'updated_at' : row['updated_at']
-            }
-            sender_person = person_model.Person(sender_user_data)
-            receiver_person = person_model.Person(receiver_user_data)
-            messages.sender_obj = sender_person
-            messages.receiver_obj = receiver_person
-            chat_list.append(messages)
+            chat_list.append(person_model.Person(row))
         print("$$$$$$$ chat list $$$$$", chat_list)
         return chat_list
     
