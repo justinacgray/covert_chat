@@ -42,6 +42,11 @@ def direct_message(person_id):
                         message_hist =message_model.Message.read_all_messages_by_receiver(session['user_id'], person_id)
                         )
 
+@APP.route("/dm/<int:message_id>")
+def like_unlike_message(message_id):
+    # check to see message is liked by user already from the db
+    # be sure to pass in user and message id!
+    pass
 
 # @APP.route("/")
 

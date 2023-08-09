@@ -18,18 +18,26 @@
                 {% if session['user_id'] == message.sender_person_id %}
                 <div style="background-color: rgb(233, 207, 233)">
                     {{message.content}} 
-                    {{message.updated_at}} ||
+                    {{message.created_at}} ||
                     {{message.sender_person_id}} ||
                     {{message.receiver_person_id}}
-                    <span class="fa fa-pencil" title="Edit"><span/> 
+                    <span class="fa fa-pencil" title="Edit"><span/>
+                    <span class="fa-regular fa-trash" title="Delete"></span>
+                    <form action="/dm/{{message.message_id}}" method = 'post'>
+                        <span name= "" value="{{message.message_id}}" class="fa-regular fa-heart"></span> 
+                    </form>
                 </div>
                 {% else %}
                 <div style="background-color: rgb(178, 243, 178)">
                     {{message.content}} 
-                    {{message.updated_at}} ||
+                    {{message.created_at}} ||
                     {{message.sender_person_id}} ||
                     {{message.receiver_person_id}}
                     <span class="fa fa-pencil" title="Edit"><span/> 
+                    <span class="fa-regular fa-trash" title="Delete"></span> 
+                    <form action="/dm/{{message.message_id}}" method = 'post'>
+                        <span name= "" value="{{message.message_id}}" class="fa-regular fa-heart"></span> 
+                    </form>
                 </div>
                 
                 {% endif %}

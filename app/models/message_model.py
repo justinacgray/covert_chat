@@ -77,6 +77,18 @@ class Message:
         pass
     
     
+    @classmethod
+    def like_message(cls, message_id):
+        message_dict = {'message_id' : message_id}
+        pass
+        
+    
+    @staticmethod
+    def checked_if_user_liked_message(message_id):
+        pass
+    
+    
+    
     # parse message_id
     @staticmethod
     def parse_msg_data(msg_data):
