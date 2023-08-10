@@ -1,6 +1,6 @@
 from app import APP
 from flask import render_template, redirect, request, session, flash
-from app.models import person_model, message_model
+from app.models import person_model, message_model, like_model
 
 
 @APP.route("/dashboard")
@@ -41,12 +41,6 @@ def direct_message(person_id):
                         chat_list = message_model.Message.logged_in_user_active_chats(session['user_id']),
                         message_hist =message_model.Message.read_all_messages_by_receiver(session['user_id'], person_id)
                         )
-
-@APP.route("/dm/<int:message_id>")
-def like_unlike_message(message_id):
-    # check to see message is liked by user already from the db
-    # be sure to pass in user and message id!
-    pass
 
 # @APP.route("/")
 

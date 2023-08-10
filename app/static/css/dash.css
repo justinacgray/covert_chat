@@ -93,3 +93,13 @@ html {
   .msger-send-btn:hover {
     background: rgb(0, 180, 50);
   }
+
+
+
+  /* directmessages */
+
+.fabutton {
+  background: none;
+  padding: 0px;
+  border: none;
+}

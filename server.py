@@ -1,5 +1,5 @@
 from app import APP
-from app.controllers import person_controllers, message_controllers
+from app.controllers import person_controllers, message_controllers, like_controllers
 
 
 

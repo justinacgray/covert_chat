@@ -18,6 +18,7 @@ class Message:
         self.updated_at = ms_data['updated_at']
         self.sender_obj = None
         self.receiver_obj = None
+        self.liked_by = []
         
     def __repr__(self) -> str:
         return f'REPR MESSAGE Method id: {self.message_id}, sender:{self.sender_person_id}, receiver:{self.receiver_person_id}'
@@ -76,19 +77,7 @@ class Message:
     def delete_message(cls):
         pass
     
-    
-    @classmethod
-    def like_message(cls, message_id):
-        message_dict = {'message_id' : message_id}
-        pass
-        
-    
-    @staticmethod
-    def checked_if_user_liked_message(message_id):
-        pass
-    
-    
-    
+
     # parse message_id
     @staticmethod
     def parse_msg_data(msg_data):

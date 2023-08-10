@@ -1,57 +1,66 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
 
-    <link 
-    href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" 
-    rel="stylesheet"  type='text/css'>
-</head>
-<body>
-    <div>
-        {% if message_hist %}
+        <link
+            href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+            rel="stylesheet" type='text/css'>
+
+        <link
+        rel="stylesheet"
+        href="{{url_for('static',filename='css/dash.css')}}"
+        />
+    </head>
+    <body>
+        <div>
+            {% if message_hist %}
             {% for message in message_hist %}
+            <main >
                 {% if session['user_id'] == message.sender_person_id %}
                 <div style="background-color: rgb(233, 207, 233)">
-                    {{message.content}} 
+                    {{message.content}}
                     {{message.created_at}} ||
                     {{message.sender_person_id}} ||
                     {{message.receiver_person_id}}
                     <span class="fa fa-pencil" title="Edit"><span/>
                     <span class="fa-regular fa-trash" title="Delete"></span>
-                    <form action="/dm/{{message.message_id}}" method = 'post'>
-                        <span name= "" value="{{message.message_id}}" class="fa-regular fa-heart"></span> 
-                    </form>
+                    <form action="/dm/{{message.message_id}}" method= 'post'>
+                        <button type="submit" class="fa fa-heart icon-larg fabutton">
+                            <i name="message_id" 
+                            value="{{message.message_id}}">
+                        </i>
+                        <span>You have {{likes_tally|length}} likes</span>   
+                        </button>
                 </div>
-                {% else %}
+                        {% else %}
                 <div style="background-color: rgb(178, 243, 178)">
-                    {{message.content}} 
+                    {{message.content}}
                     {{message.created_at}} ||
                     {{message.sender_person_id}} ||
                     {{message.receiver_person_id}}
-                    <span class="fa fa-pencil" title="Edit"><span/> 
-                    <span class="fa-regular fa-trash" title="Delete"></span> 
-                    <form action="/dm/{{message.message_id}}" method = 'post'>
-                        <span name= "" value="{{message.message_id}}" class="fa-regular fa-heart"></span> 
+                    <span class="fa fa-pencil" title="Edit"><span/>
+                    <span class="fa-regular fa-trash" title="Delete"></span>
+                    <form action="/dm/{{message.message_id}}" method= 'post'>
+                        <button type="submit" class="fa fa-heart icon-large fabutton">
+                            <i name="message_id" 
+                            value="{{message.message_id}}">
+                            </i>
+                            <span>You have {{likes_tally|length}} likes</span>
+                        </button>
                     </form>
                 </div>
-                
-                {% endif %}
-            {% endfor %}
+                        {% endif %}
+            </main>
+                    {% endfor %}
 
-            
-            {% else %}
-            <p> NO MESSAGES </p>
-
-            {% endif %}
-            
-
-    </div>
-    
-</body>
+                    {% else %}
+                    <p> NO MESSAGES </p>
+                    {% endif %}
+                </div>
+    </body>
 </html>
-
