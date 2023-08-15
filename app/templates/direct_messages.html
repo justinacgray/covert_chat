@@ -16,6 +16,7 @@
         href="{{url_for('static',filename='css/dash.css')}}"
         />
     </head>
+    <!-- when displaying Message (Instance) class we are NOT using the query results but the init/constructor attributes -->
     <body>
         <div>
             {% if message_hist %}
@@ -34,8 +35,9 @@
                             <i name="message_id" 
                             value="{{message.message_id}}">
                         </i>
-                        <span>You have {{likes_tally|length}} likes</span>   
+                        <span>You have {{message.liked_by|length}} likes</span>   
                         </button>
+                    </form>
                 </div>
                         {% else %}
                 <div style="background-color: rgb(178, 243, 178)">
@@ -50,7 +52,7 @@
                             <i name="message_id" 
                             value="{{message.message_id}}">
                             </i>
-                            <span>You have {{likes_tally|length}} likes</span>
+                            <span>You have {{message.liked_by|length}} likes</span>
                         </button>
                     </form>
                 </div>

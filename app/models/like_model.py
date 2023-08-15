@@ -44,7 +44,9 @@ class Like:
         query = '''
             SELECT *
             FROM likes
-            WHERE message_id = %(message_id)s;        
+            WHERE message_id = %(message_id)s
+            and liked_by_user_id = %(logged_in_user_id)s
+            ;        
         '''
         results = MySQLConnection(cls.db).query_db(query, message_dict)
         print("RESULTS FROM LIKE", results)
