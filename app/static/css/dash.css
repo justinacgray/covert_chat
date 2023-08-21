@@ -11,8 +11,10 @@ html {
 }
 
 .main-dash {
-    margin: 50px;
-    border: 2px dotted purple;
+    margin: 0 auto;
+    width: 100vw;
+    height: 100vh;
+    border: 5px dotted rgb(173, 0, 173);
 }
 
 .msger-header {
@@ -32,45 +34,39 @@ html {
 
 .inner-container {
     border: 2px dotted rgb(21, 0, 128);
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: space-between;
-    margin: 25px;
+    padding: 10px;
 
 }
 
 .active-chat-list {
     border: 2px dotted rgb(1, 88, 0);
-    margin: 25px 10px;
+    flex-grow: 2;
+    height: 100%;
     padding: 15px;
+    margin: 15x;
+
+
 }
 
 .current-chat {
-    border: 2px dotted rgb(128, 0, 28);
-    display: flex;
-    flex-flow: column wrap;
-    justify-content: space-between;
-    margin: 25px 10px;
-
-}
-
-.current-chat .logged-in-user {
-    border: 2px dotted rgb(178, 83, 0);
+    border: 3px dotted rgb(232, 103, 131);
+    flex-grow: 5;
+    height: 100%;
     padding: 15px;
-    border-radius: 15px;
-    
-}
-.current-chat .other-user {
-    border: 2px dotted rgb(0, 128, 113);
-    padding: 15px;
-    border-radius: 15px;
 
 }
+
 
 .msger-inputarea {
     display: flex;
     padding: 10px;
     border-top: var(--border);
     background: #eee;
+    margin: 20px 0px;
   }
   .msger-inputarea * {
     padding: 10px;
@@ -95,11 +91,38 @@ html {
   }
 
 
-
   /* directmessages */
 
 .fabutton {
   background: none;
   padding: 0px;
   border: none;
+
+}
+
+/* direct_message */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.chat-bubble {
+  max-width: 70%;
+  padding: 10px;
+  border: 1px;
+  border-radius: 10px;
+  margin: 10px;
+  
+}
+.sender-msg {
+  background-color: #DBCBD8;
+  align-self: flex-start;
+}
+
+.receiver-msg {
+  background-color: #9ad4d6;
+  align-self: flex-end;
 }

@@ -19,11 +19,14 @@
     <!-- when displaying Message (Instance) class we are NOT using the query results but the init/constructor attributes -->
     <body>
         <div>
+            <!-- todo change order of messages to descending -->
+            
             {% if message_hist %}
             {% for message in message_hist %}
-            <main >
+            <main class="chat-container" >
                 {% if session['user_id'] == message.sender_person_id %}
-                <div style="background-color: rgb(233, 207, 233)">
+                <div class='chat-bubble sender-msg'>
+                    
                     {{message.content}}
                     {{message.created_at}} ||
                     {{message.sender_person_id}} ||
@@ -40,7 +43,7 @@
                     </form>
                 </div>
                         {% else %}
-                <div style="background-color: rgb(178, 243, 178)">
+                <div class='chat-bubble receiver-msg'>
                     {{message.content}}
                     {{message.created_at}} ||
                     {{message.sender_person_id}} ||

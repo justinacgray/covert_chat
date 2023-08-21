@@ -3,64 +3,60 @@
 
 {% block content %}
 
+<h1 class="title is-1" >{{session['user_name']}} {{session['user_id']}}</h1>
 
 
-<section class="main-dash">
 
+<main class="main-dash container is-widescreen">
     <header class="msger-header">
         <div class="msger-header-title">
-            <i class="fas fa-comment-alt"></i> CovertChat 
-
-        </div>
-        
+            <i class="fas fa-comment-alt"></i> CovertChat</div>
     </header>
-    <h2>{{session['user_name']}} {{session['user_id']}}</h2>
-
-    <main class="inner-container">
-        <aside class="active-chat-list">
-            <ul>
-                
-                {% for person in chat_list %}
-                    <li>
-                    <a href="/dm/{{person.user_id}}">{{person.username}}</a>
-                </li>
-                {% endfor %}
-            </ul>
-
-        </aside>
-
+    
+    <section class="inner-container">
+        
         <aside class="current-chat">
             {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
-                    <p> {{message}}</p>
+                <p> {{message}}</p>
                 {% endfor %}
-            {% endif %}
-        {% endwith%}
-            <form action="/create-message" class="msger-inputarea" method="post">
-                <select name="receiver_person_id">
-                    <option value="0">Choose an User</option>
-
-                    {% for user in all_users%}
-                    <option value="{{user.user_id}}">{{user.first_name}}</option>
-                    {% endfor%}
-
-                </select>
-                <input type="text" class="msger-input" name="content" placeholder="Enter your message...">
-                <button type="submit" class="msger-send-btn">Send</button>
-            </form>
-        
-            <!-- include allows you to use a template in another template -->
-            <div>
-                {% include 'direct_messages.html' %}              
-            </div>
-            
-            
-
+                {% endif %}
+                {% endwith%}
+                <form action="/create-message" class="msger-inputarea" method="post">
+                    <select name="receiver_person_id">
+                        <option value="0">Choose an User</option>
+                        
+                        {% for user in all_users%}
+                        <option value="{{user.user_id}}">{{user.first_name}}</option>
+                        {% endfor%}
+                        
+                    </select>
+                    <textarea type="text" class="msger-input" name="content" placeholder="Enter your message..."> </textarea>
+                    
+                    <button type="submit" class="msger-send-btn">Send</button>
+                </form>
+                
+                <!-- include allows you to use a template in another template -->
+                <div>
+                    {% include 'direct_messages.html' %}              
+                </div>
         </aside>
-    </main>
 
+        <aside class="active-chat-list">
+            <ul>
+                
+                {% for person in chat_list %}
+                <li>
+                    <a href="/dm/{{person.user_id}}">{{person.username}}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </aside>
 
-</section>
-
+    </section>
+    
+    
+    
+</main>
 {% endblock %}
