@@ -9,6 +9,9 @@ flask-cors = "*"
 flask-sqlalchemy = "*"
 flask-bcrypt = "*"
 pymysql = "*"
+flask-socketio = "*"
+python-dotenv = "*"
+pip = "*"
 
 [dev-packages]
 

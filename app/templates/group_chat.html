@@ -1,7 +1,42 @@
-{% extends "START/header.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.js"></script>
+</head>
+<body>
+    <div id="message-container"></div>
+    <script>
+        // Establish a connection to the server using Socket.IO
+        var socket = io.connect('http://' + document.domain + ':' + location.port);
+    
+        // Event handler when the Socket.IO connection is established
+        socket.on('joined-group', function(data) {
+            // Handle the joined_group event on the client side
+            console.log(data.message);
+        });
+    
+        // Event handler for incoming 'message' events from the server
+        socket.on('group-msgs', function(data) {
+            // Get the HTML element where messages will be displayed
+            var messageContainer = document.getElementById('message-container');
+    
+            // Create a new paragraph element to display the received message
+            var messageElement = document.createElement('p');
+    
+            // Set the content of the paragraph element to the received message data
+            messageElement.innerHTML = data.data;
+    
+            // Append the paragraph element to the message container
+            messageContainer.appendChild(messageElement);
+        });
+    </script>
 
-{% block content %}
-<body class="body" style="background-color:#f23d49">
-    <p> TEST</p> <!-- for example -->
+    
+    
+    
 </body>
-{% endblock %}
+</html>

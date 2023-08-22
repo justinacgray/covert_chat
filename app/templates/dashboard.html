@@ -33,7 +33,7 @@
                         
                     </select>
                     <textarea type="text" class="msger-input" name="content" placeholder="Enter your message..."> </textarea>
-                    
+
                     <button type="submit" class="msger-send-btn">Send</button>
                 </form>
                 
@@ -51,6 +51,14 @@
                     <a href="/dm/{{person.user_id}}">{{person.username}}</a>
                 </li>
                 {% endfor %}
+            </ul>
+
+            <br/>
+            <br/>
+
+            <!-- loop through group names -->
+            <ul>
+                <li><a href="/group-chat">Start a Group Chat</a></li>
             </ul>
         </aside>
 

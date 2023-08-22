@@ -1,5 +1,7 @@
 from app import APP
-from app.controllers import person_controllers, message_controllers, like_controllers
+from app import socketio
+from app.controllers import person_controllers, message_controllers, like_controllers, group_controllers
+
 
 
 
@@ -7,4 +9,5 @@ from app.controllers import person_controllers, message_controllers, like_contro
 print("inside server")
 
 if __name__ == "__main__":
-    APP.run(debug=True)
+    socketio.run(APP, debug=True)
+    # APP.run(debug=True)
