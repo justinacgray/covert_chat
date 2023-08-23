@@ -12,6 +12,7 @@ pymysql = "*"
 flask-socketio = "*"
 python-dotenv = "*"
 pip = "*"
+eventlet = "*"
 
 [dev-packages]
 

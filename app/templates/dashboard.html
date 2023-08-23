@@ -38,9 +38,18 @@
                 </form>
                 
                 <!-- include allows you to use a template in another template -->
+                {% if message_hist %}
                 <div>
                     {% include 'direct_messages.html' %}              
                 </div>
+
+
+                {% else %}
+                <div>
+                    {% include 'group_chat.html' %}
+                    
+                </div>
+                {% endif %}
         </aside>
 
         <aside class="active-chat-list">
