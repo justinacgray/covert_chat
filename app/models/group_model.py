@@ -2,10 +2,9 @@ from app.config.mysqlconnection import MySQLConnection, connectToMySQL
 import random
 from flask import flash, session
 
+db = 'chat_db'
 
 class Group:
-    db = 'chat_db'
-
     def __init__(self, room_data):
         self.group_id = room_data['group_id']
         self.group_name = room_data['group_name'] 
@@ -22,13 +21,14 @@ class Group:
         
         parsed_group_dict = cls.parse_group_data(group_data)
         query = '''
-            INSERT INTO groups (group_id, group_name, creator_user_id )
+            INSERT INTO `groups` (group_id, group_name, creator_user_id )
             VALUES ( %(group_id)s, %(group_name)s, %(creator_user_id)s);
         '''
         
-        new_group_id = MySQLConnection(cls.db).query_db(query, parsed_group_dict)
-        print("RESULTS group_data ====> ", new_group_id)
-        
+        results = MySQLConnection(db).query_db(query, parsed_group_dict)
+        print("RESULTS group_data ====> ", results)
+        new_group_id = parsed_group_dict['group_id']
+        print("NEW GROUP DATA ====>", new_group_id)
         return new_group_id
     
 
@@ -57,7 +57,6 @@ class Group:
     @staticmethod
     def parse_group_data(group_data):
         parsed_data = {
-            # 'id': uuid4().hex,
             'group_id' : random.getrandbits(22),
             'group_name' : group_data['group_name'],
             'creator_user_id' : group_data['creator_user_id']
@@ -74,5 +73,16 @@ class GroupMembers:
         self.updated_at = group_members_data['updated_at']
         
     @classmethod
-    def create_members_per_group():
-        pass
+    def create_members_per_group(cls, group_id, user_id ):
+        group_members = {
+            "group_id" : group_id,
+            "persons_user_id" : user_id
+        }
+        query = '''
+            INSERT INTO `group_members` (group_id, persons_user_id )
+            VALUES ( %(group_id)s, %(persons_user_id)s);
+        '''
+        results = MySQLConnection(db).query_db(query, group_members)
+        print("RESULTS group_members ====> ", results)
+        
+        return results
