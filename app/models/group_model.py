@@ -33,17 +33,25 @@ class Group:
     
 
     @classmethod
-    def read_all_messages_in_group(cls):
-        pass
-    
-    @classmethod
-    def update_message_in_group(cls):
-        pass
-    
-    @classmethod
-    def delete_message_in_group(cls):
-        pass
-    
+    def view_all_group_chat_per_user(cls, person_id):
+        query = '''
+            SELECT chat.*, mem.persons_user_id 
+            FROM group_members mem
+            JOIN `groups`chat
+            ON mem.group_id = chat.group_id
+            WHERE mem.persons_user_id = %(person_id)s
+            ORDER BY chat.updated_at;
+        '''
+        group_members = []
+        group_id_dict = {
+            "person_id" : person_id
+        }
+        results = MySQLConnection(db).query_db(query, group_id_dict)
+        for one_chat_group in results:
+            group_members.append(cls(one_chat_group))
+        print("######## USER CHAT LIST ########", group_members)
+        return group_members
+
     
     @staticmethod
     def valid_group(group_dict):
@@ -63,6 +71,8 @@ class Group:
         }
         print("$$$$$$$$$$$$$ parsed group data ===>" , parsed_data)
         return parsed_data 
+
+
 
 class GroupMembers:
     def __init__(self, group_members_data):
@@ -84,5 +94,6 @@ class GroupMembers:
         '''
         results = MySQLConnection(db).query_db(query, group_members)
         print("RESULTS group_members ====> ", results)
-        
         return results
+    
+    

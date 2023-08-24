@@ -1,11 +1,7 @@
 from app import APP
 from flask import render_template, redirect, request, session, flash
-from app import socketio
-from flask_socketio import SocketIO, emit
 from app.models import person_model, message_model, group_model
-# socketio = SocketIO()
 
-users = {}
 
 @APP.route("/group-chat")
 def render_group_chat(): 
@@ -35,18 +31,17 @@ def create_group_and_members():
         new_group_member = group_model.GroupMembers.create_members_per_group(new_group, user_id)
         print(f"Group member {user_id} was added to the DB! Here is the new group member info {new_group_member}")
     
+    add_creator_to_chat = group_model.GroupMembers.create_members_per_group(new_group, session['user_id'])
     return redirect('/dashboard')
+    # return "Success"
+
+@APP.route('/group-chat/<int:group_id>')
+def view_group_chat(group_id):
+    pass
 
 
-@socketio.on('connect')
-def enter_group():
-    print('shalom friend')
-    
 
-@socketio.on('user_join')
-def user_enters(username):
-    print(f" Shalom {username}! ")
-    users[username] = request.sid
+
 
 
 

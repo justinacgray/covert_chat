@@ -1,6 +1,6 @@
 from app import APP
 from flask import render_template, redirect, request, session, flash
-from app.models import person_model, message_model, like_model
+from app.models import person_model, message_model, group_model
 
 
 @APP.route("/dashboard")
@@ -8,7 +8,14 @@ def user_dash():
     if 'user_id' not in session:
         return redirect("/")
     print("SESSION DASH ===>", session)
-    return render_template("dashboard.html", all_users = person_model.Person.get_all_users(), chat_list = message_model.Message.logged_in_user_active_chats(session['user_id']))
+    return render_template("dashboard.html", 
+                        all_users = person_model.Person.get_all_users(), 
+                        chat_list = message_model.Message.logged_in_user_active_chats(session['user_id']),
+                        group_chat_list = group_model.Group.view_all_group_chat_per_user(session['user_id'])
+                        # message_hist =message_model.Message.read_all_messages_by_receiver(session['user_id'], person_id)
+                        
+                        
+                        )
 
 
 

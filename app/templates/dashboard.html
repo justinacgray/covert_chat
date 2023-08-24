@@ -21,8 +21,8 @@
                 {% for message in messages %}
                 <p> {{message}}</p>
                 {% endfor %}
-                {% endif %}
-                {% endwith%}
+            {% endif %}
+            {% endwith%}
                 <form action="/create-message" class="msger-inputarea" method="post">
                     <select name="receiver_person_id">
                         <option value="0">Choose an User</option>
@@ -36,20 +36,11 @@
 
                     <button type="submit" class="msger-send-btn">Send</button>
                 </form>
+
+            {% include 'message_base.html' %}
                 
-                <!-- include allows you to use a template in another template -->
-                {% if message_hist %}
-                <div>
-                    {% include 'direct_messages.html' %}              
-                </div>
 
-
-                {% else %}
-                <div>
-                    {% include 'group_chat.html' %}
-                    
-                </div>
-                {% endif %}
+    
         </aside>
 
         <aside class="active-chat-list">
@@ -64,10 +55,19 @@
 
             <br/>
             <br/>
-
             <!-- loop through group names -->
             <ul>
                 <li><a href="/group-chat">Start a Group Chat</a></li>
+            </ul>
+
+            <br/>
+            <br/>
+
+            <ul>
+                {% for group_chat in group_chat_list %}
+                <a href="/group_chat/{{group_chat.group_id}}">{{group_chat.group_name}}</a>
+                {% endfor%}
+
             </ul>
         </aside>
 
