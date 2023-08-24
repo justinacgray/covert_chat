@@ -14,16 +14,24 @@ html {
     margin: 0 auto;
     width: 100vw;
     height: 100vh;
-    border: 5px dotted rgb(173, 0, 173);
+    border: 1px solid rgb(219, 218, 218);
+    border-radius: 20px;
 }
 
 .msger-header {
     display: flex;
-    justify-content: space-between;
     padding: 10px;
+    justify-content: center;
     border-bottom: var(--border);
-    background: #eee;
-    color: #666;
+    background-image: linear-gradient(to right, #9ad4d6  ,#00afb5);
+    border-radius: 20px 20px 0px 0px;
+    height: 70px;
+   
+  }
+  .msger-header-title{
+    display: flex;
+    align-self: center;
+    color: white;
   }
   
   .msger-chat {
@@ -31,19 +39,34 @@ html {
     overflow-y: auto;
     padding: 10px;
   }
+  .msgs-title, .grp-title{
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    color: white;
+    background-color: #9ad4d6; 
+    border: 1px solid rgb(219, 218, 218);
+    border-radius: 20px;
+    padding: 10px;
+    font-weight: bold;
+  }
 
 .inner-container {
-    border: 2px dotted rgb(21, 0, 128);
+    background-color:#DBCBD8;
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding: 20px;
+    gap:20px;
+    box-shadow: 0 5px 10px #9c9c9c inset;
 
 }
 
 .active-chat-list {
-    border: 2px dotted rgb(1, 88, 0);
+    border:1px;
+    border-radius: 20px;
+    background-color:#ffffff;
     flex-grow: 2;
     height: 100%;
     padding: 15px;
@@ -51,16 +74,16 @@ html {
 
 
 }
-
-.current-chat {
-    border: 3px dotted rgb(232, 103, 131);
-    flex-grow: 5;
+.current-chat{
+    border:1px;
+    background-color:#ffffff;
+    flex-grow: 4;
     height: 100%;
     padding: 15px;
+    border-radius: 20px;
+
 
 }
-
-
 .msger-inputarea {
     display: flex;
     padding: 10px;
@@ -106,14 +129,16 @@ html {
   align-items: flex-start;
   max-width: 80%;
   margin: 0 auto;
+
 }
 
 .chat-bubble {
-  max-width: 70%;
+  max-width: 100%;
   padding: 10px;
   border: 1px;
   border-radius: 10px;
   margin: 10px;
+  box-shadow:5px 5px 5px #bfbfbf;
   
 }
 .sender-msg {
@@ -124,4 +149,48 @@ html {
 .receiver-msg {
   background-color: #9ad4d6;
   align-self: flex-end;
+}
+ul  {
+  background: #FFF;
+  color: #000;
+  border:1px;
+  border-radius: 20px;
+  padding: 7px;
+  text-align: center;
+}
+li{
+  padding: 7px;
+  border:1px;
+  border-radius: 20px;
+}
+li:hover{
+  transform: scale(1.1);
+  background: #FFF;
+  box-shadow: 5px 5px 15px #e3e3e3;
+  border:1px;
+  border-radius: 20px;
+
+}
+
+a:link {
+  color:#DBCBD8;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #1c8184;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(0, 124, 159);
+  background-color: transparent;
+}
+
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
 }

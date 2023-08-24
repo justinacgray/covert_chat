@@ -8,9 +8,10 @@
 
 
 <main class="main-dash container is-widescreen">
-    <header class="msger-header">
-        <div class="msger-header-title">
-            <i class="fas fa-comment-alt"></i> CovertChat</div>
+    <header class="msger-header ">
+        <div class="msger-header-title subtitle is-2 ">
+            <p class="has-text-centered">CovertChat</p>
+        </div>
     </header>
     
     <section class="inner-container">
@@ -44,6 +45,7 @@
         </aside>
 
         <aside class="active-chat-list">
+            <div class="msgs-title subtitle is-4"> Messages </div>
             <ul>
                 
                 {% for person in chat_list %}
@@ -55,6 +57,14 @@
 
             <br/>
             <br/>
+                <div class="grp-title subtitle is-4"> Current Groups </div>
+            <ul>
+                {% for group_chat in group_chat_list %}
+                <a href="/group_chat/{{group_chat.group_id}}">{{group_chat.group_name}}</a>
+                {% endfor%}
+
+            </ul>
+            <br/>
             <!-- loop through group names -->
             <ul>
                 <li><a href="/group-chat">Start a Group Chat</a></li>
@@ -62,13 +72,6 @@
 
             <br/>
             <br/>
-
-            <ul>
-                {% for group_chat in group_chat_list %}
-                <a href="/group_chat/{{group_chat.group_id}}">{{group_chat.group_name}}</a>
-                {% endfor%}
-
-            </ul>
         </aside>
 
     </section>
