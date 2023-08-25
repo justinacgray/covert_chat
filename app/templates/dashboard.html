@@ -70,6 +70,31 @@
                 <li><a href="/group-chat">Start a Group Chat</a></li>
             </ul>
 
+            <div>
+                <div id="landing">
+                    <!-- todo when clicking the button a form should display to create a name, add users -->
+                    <form action="/create-group-chat" id = "group_chat" class="form" method="post">
+                        <div>
+                            <label for="name" class="form__label">Name</label>
+                            <input type="text" name="group_name" id="group_name" placeholder="Name" class="" />
+                        </div>
+            
+                        <div>
+                            {% for user in all_users%}
+                            <label>
+                                {% if user.user_id != session['user_id']%}
+                                <input id="user_id" type="checkbox" name="group_members"
+                                    value="{{user.user_id}}">{{user.first_name}}
+                                {% endif %}
+                            </label>
+                            {% endfor%}
+                        </div>
+                        <button id="join-btn">Create Group</button>
+                    </form>
+                </div>
+                
+            </div>
+
             <br/>
             <br/>
         </aside>

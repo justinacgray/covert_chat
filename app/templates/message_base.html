@@ -13,17 +13,11 @@
     <!-- include allows you to use a template in another template -->
     <div>
         {% include 'direct_messages.html' %}              
-    </div>
+    </div>  
+    {% else %}
+    {% include 'group_chat.html' %}
 
-
-    {% elif group_chat_list %}
-    <div>
-        {% include 'group_chat.html' %}
-        
-    </div>
-
-  
-
+    
     {% endif %}
 
     {% endblock msg_content %}

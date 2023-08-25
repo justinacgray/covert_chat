@@ -11,13 +11,8 @@ def user_dash():
     return render_template("dashboard.html", 
                         all_users = person_model.Person.get_all_users(), 
                         chat_list = message_model.Message.logged_in_user_active_chats(session['user_id']),
-                        group_chat_list = group_model.Group.view_all_group_chat_per_user(session['user_id'])
-                        # message_hist =message_model.Message.read_all_messages_by_receiver(session['user_id'], person_id)
-                        
-                        
+                        group_chat_list = group_model.Group.view_all_group_chat_per_user(session['user_id'])    
                         )
-
-
 
 @APP.route("/create-message", methods = ['POST'])
 def new_msg():
@@ -32,9 +27,7 @@ def new_msg():
         'receiver_person_id' : request.form['receiver_person_id'],
         'sender_user_id' : session['user_id']
     }
-    
     message_model.Message.create_message(message_dict)
-    
     return redirect('/dashboard')
 
 

@@ -1,69 +1,40 @@
+
+<script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+
 <script src="https://code.jquery.com/jquery-3.5.1.js"
 integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <main>
 
     <div id="message-container"></div>
     GROUP CHATTING!
-
-    <div id="landing">
-        <!-- todo when clicking the button a form should display to create a name, add users -->
-        <form action="/create-group-chat" id = "group_chat" class="form" method="post">
-            <div>
-                <label for="name" class="form__label">Name</label>
-                <input type="text" name="group_name" id="group_name" placeholder="Name" class="" />
-            </div>
-
-            <div>
-                {% for user in all_users%}
-                <label>
-                    {% if user.user_id != session['user_id']%}
-                    <input id="user_id" type="checkbox" name="group_members"
-                        value="{{user.user_id}}">{{user.first_name}}
-                    {% endif %}
-                </label>
-                {% endfor%}
-            </div>
-            <button id="join-btn">Create Group</button>
-        </form>
+    <div id="test">
+        <label for="name" class="form__label">Test</label>
+        <input type="text" name="test_name" placeholder="Test" class="" />
     </div>
 
-    <script type="text/javascript">
-        $(document).on('submit', '#group_chat', function (e) {
-            console.log('hello');
-            e.preventDefault();
-            $.ajax({
-                type: 'POST',
-                url: '/create-group-chat',
-                data: {
-                    user_id: $("#user_id").val(),
-                    group_name : $("#group_name").val()
-                },
-                success: function () {
-                    alert('saved');
-                }
-            })
-        });
-    </script>
-
+   
 
     <script>
-        // Establish a connection to the server using Socket.IO
-        const socket = io.connect({ autoConnect: false });
-
-        document.getElementById("join-btn").addEventListener("click", function () {
-            let username = document.getElementById("user_id").value;
-
-            console.log("USERNAME",username)
-
+        const currentLocation = document.location.pathname
+        const socket = io.connect({ autoConnect: true });
+        if (currentLocation.includes('/group-chat/')){
+            const pathSplit = currentLocation.split('/')
+            const groupId = pathSplit[2]
+            // Establish a connection to the server using Socket.IO
             socket.connect();
-
-            socket.on("connect", function () {
+            socket.on("connect", function() {
+                let username = document.getElementById("username").value;
                 socket.emit("user_join", username);
             })
+            console.log("groupId", groupId)
+        }
 
-            document.getElementById("chat").style.display = "block";
-            document.getElementById("landing").style.display = "none";
-        })
+        console.log("Document location", document.location.pathname)
+        
+
+        document.getElementById("test").style.display = "block";
+        
+    
 
     </script>
 </main>
