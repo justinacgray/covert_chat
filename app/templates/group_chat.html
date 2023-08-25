@@ -1,11 +1,13 @@
 
 
 
-<script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+
 
 <main>
    
     GROUP CHATTING!
+    <!-- conditionally render  -->
+    {% if group_chat_list %}
     <div id="chat">
         <ul id="chat-messages">
         </ul>
@@ -14,7 +16,7 @@
         <input type="hidden" name="username" id='username' placeholder="Test" value="{{username}}" />
     </div>
 
-   
+    {% endif %}
 
     <script>
         const currentLocation = document.location.pathname
@@ -32,7 +34,7 @@
             })
             console.log("groupId", groupId)
         }
-         document.getElementById("message").addEventListener("keyup", function (event) {
+        document.getElementById("message").addEventListener("keyup", function (event) {
             if (event.key == "Enter") {
                 let message = document.getElementById("message").value;
                 socket.emit("new_message", message);
