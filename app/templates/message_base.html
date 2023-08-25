@@ -7,22 +7,20 @@
     <title>Document</title>
 </head>
 <body>
-    message base starts here
-    {% block msg_content %}
+{% block msg_content %}
     {% if message_hist %}
-    <!-- include allows you to use a template in another template -->
-    <div>
-        {% include 'direct_messages.html' %}              
-    </div>  
+        <!-- include allows you to use a template in another template -->
+        <div>
+            {% include 'direct_messages.html' %} 
+        </div>
+    {% elif link_type != context %}
+        <div class="group-chat">
+            {% include 'group_chat.html' %}
+        </div>
     {% else %}
-    {% include 'group_chat.html' %}
-
-    
+        Lets get started!
     {% endif %}
+{% endblock msg_content %}
 
-    {% endblock msg_content %}
-    message base ends here
-
-    
 </body>
 </html>

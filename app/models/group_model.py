@@ -93,7 +93,8 @@ class GroupMembers:
             VALUES ( %(group_id)s, %(persons_user_id)s);
         '''
         results = MySQLConnection(db).query_db(query, group_members)
-        print("RESULTS group_members ====> ", results)
+        session['group_id'] = group_members['group_id']
+        print("RESULTS group_members ====> ", results, session)
         return results
     
     

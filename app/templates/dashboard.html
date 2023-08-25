@@ -40,7 +40,6 @@
 
             {% include 'message_base.html' %}
                 
-
     
         </aside>
 
@@ -60,7 +59,9 @@
                 <div class="grp-title subtitle is-4"> Current Groups </div>
             <ul>
                 {% for group_chat in group_chat_list %}
-                <a href="/group_chat/{{group_chat.group_id}}">{{group_chat.group_name}}</a>
+                <li>
+                <a href="/group-chat/{{group_chat.group_id}}">{{group_chat.group_name}}</a>
+                </li>
                 {% endfor%}
 
             </ul>
@@ -84,7 +85,7 @@
                             <label>
                                 {% if user.user_id != session['user_id']%}
                                 <input id="user_id" type="checkbox" name="group_members"
-                                    value="{{user.user_id}}">{{user.first_name}}
+                                    value="{{user.user_id}}">{{user.username}}
                                 {% endif %}
                             </label>
                             {% endfor%}

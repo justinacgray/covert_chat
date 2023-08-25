@@ -1,15 +1,17 @@
 
+
+
 <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
 
-<script src="https://code.jquery.com/jquery-3.5.1.js"
-integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 <main>
-
-    <div id="message-container"></div>
+   
     GROUP CHATTING!
-    <div id="test">
+    <div id="chat">
+        <ul id="chat-messages">
+        </ul>
         <label for="name" class="form__label">Test</label>
-        <input type="text" name="test_name" placeholder="Test" class="" />
+        <input type="text" name="test_name"  id='message' placeholder="Test" class="" />
+        <input type="hidden" name="username" id='username' placeholder="Test" value="{{username}}" />
     </div>
 
    
@@ -17,24 +19,38 @@ integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="ano
     <script>
         const currentLocation = document.location.pathname
         const socket = io.connect({ autoConnect: true });
+        socket.connect();
         if (currentLocation.includes('/group-chat/')){
             const pathSplit = currentLocation.split('/')
             const groupId = pathSplit[2]
             // Establish a connection to the server using Socket.IO
-            socket.connect();
             socket.on("connect", function() {
+                console.log(socket.on())
                 let username = document.getElementById("username").value;
                 socket.emit("user_join", username);
+                console.log(socket.emit(), username )
             })
             console.log("groupId", groupId)
         }
+         document.getElementById("message").addEventListener("keyup", function (event) {
+            if (event.key == "Enter") {
+                let message = document.getElementById("message").value;
+                socket.emit("new_message", message);
+                document.getElementById("message").value = "";
+            }
+        })
+
+        socket.on("chat", function(data) {
+            let ul = document.getElementById("chat-messages");
+            let li = document.createElement("li");
+            li.appendChild(document.createTextNode(data["username"] + ": " + data["message"]));
+            ul.appendChild(li);
+            ul.scrolltop = ul.scrollHeight;
+        })
 
         console.log("Document location", document.location.pathname)
         
 
         document.getElementById("test").style.display = "block";
-        
-    
-
     </script>
 </main>
