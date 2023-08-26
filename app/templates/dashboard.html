@@ -45,10 +45,10 @@
 
         <aside class="active-chat-list">
             <div class="msgs-title subtitle is-4"> Messages </div>
-            <ul>
+            <ul class="group1">
                 
                 {% for person in chat_list %}
-                <li>
+                <li class="group1">
                     <a href="/dm/{{person.user_id}}">{{person.username}}</a>
                 </li>
                 {% endfor %}
@@ -57,9 +57,9 @@
             <br/>
             <br/>
                 <div class="grp-title subtitle is-4"> Current Groups </div>
-            <ul>
+            <ul class="group1">
                 {% for group_chat in group_chat_list %}
-                <li>
+                <li class="group1">
                 <a href="/group-chat/{{group_chat.group_id}}">{{group_chat.group_name}}</a>
                 </li>
                 {% endfor%}
@@ -67,8 +67,8 @@
             </ul>
             <br/>
             <!-- loop through group names -->
-            <ul>
-                <li><a href="/group-chat">Start a Group Chat</a></li>
+            <ul class="group1">
+                <li class="group1"><a href="/group-chat">Start a Group Chat</a></li>
             </ul>
 
             <div>

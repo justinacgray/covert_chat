@@ -150,7 +150,7 @@ html {
   background-color: #9ad4d6;
   align-self: flex-end;
 }
-ul  {
+ul.group1 {
   background: #FFF;
   color: #000;
   border:1px;
@@ -158,12 +158,12 @@ ul  {
   padding: 7px;
   text-align: center;
 }
-li{
+li.group1{
   padding: 7px;
   border:1px;
   border-radius: 20px;
 }
-li:hover{
+li.group1:hover{
   transform: scale(1.1);
   background: #FFF;
   box-shadow: 5px 5px 15px #e3e3e3;
@@ -193,4 +193,41 @@ a:active {
   color: yellow;
   background-color: transparent;
   text-decoration: underline;
+}
+
+/* Chat Window */
+#chat{
+  max-width: 100%;
+  height: 550px;
+  padding: 10px;
+  border: 1px;
+  border-radius: 10px;
+  margin: 10px;
+}
+#chat-messages{
+  color: #1c8184;
+  align-self: flex-start;
+  overflow-y:  scroll;
+  height: 500px;
+}
+#chat-messages::-webkit-scrollbar{
+  display:none;
+}
+
+#message { 
+  padding:10px; 
+  font-size:17px; 
+  text-align:left; 
+  border-width:4px; 
+  border-radius:22px; 
+  border-style:double; 
+  border-color:#609cab; 
+  box-shadow: 3px 2px 6px 0px rgba(42,42,42,.24); 
+  font-weight:normal; 
+  font-family:sans-serif;
+  width: 99%  }
+#message:focus { outline:none; } 
+
+.chat-input{
+  align-items: Baseline;
 }

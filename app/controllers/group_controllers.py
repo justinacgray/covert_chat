@@ -34,7 +34,6 @@ def create_group_and_members():
         new_group_member = group_model.GroupMembers.create_members_per_group(new_group, user_id)
         print(f"Group member {user_id} was added to the DB! Here is the new group member info {new_group_member}")
     add_creator_to_chat = group_model.GroupMembers.create_members_per_group(new_group, session['user_id'])
-    session['group_id'] = new_group
     return redirect(f'/group-chat/{new_group}')
     # return "Success"
 
@@ -43,12 +42,17 @@ def view_group_chat(group_id):
     context = {
     'combined_link_type': f'group-chat/{group_id}'
 }
+    
     return render_template("dashboard.html", all_users = person_model.Person.get_all_users(), chat_list = message_model.Message.logged_in_user_active_chats(session['user_id']), group_chat_list = group_model.Group.view_all_group_chat_per_user(session['user_id']), context=context)
+<<<<<<< Updated upstream
 
 
 
 #################################################################################
 # socket io connection
+=======
+    
+>>>>>>> Stashed changes
 users = {}
 
 # @socketio.on('connect')
