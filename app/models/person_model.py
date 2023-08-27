@@ -46,7 +46,8 @@ class Person:
         if str(user_id) == "False":
             return False
         session['user_id'] = parsed_data['id']
-        session['user_name'] = f"{ parsed_data['first_name'] } { parsed_data['last_name'] }"
+        session['username'] = parsed_data['username']
+
         print("SESSION ===>", session)
         print("USER ID FROM MODELS ==>", user_id)
         return True
@@ -163,7 +164,7 @@ class Person:
         if user:
             if bcrypt.check_password_hash(user.password, login_data['password']):
                 session['user_id'] = user.user_id
-                session['user_name'] = user.first_name              
+                session['username'] = user.username         
                 return True
             else:
                 flash("Login credentials are incorrect", category='error')

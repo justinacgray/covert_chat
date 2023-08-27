@@ -7,7 +7,7 @@
     <div class="chat-input">
         <label for="name" class="form__label"/>
         <input type="text" name="test_name"  id='message' placeholder="Test" class="" />
-        <input type="hidden" name="username" id='username' placeholder="Test" value="{{username}}" />
+        <input type="hidden" name="username" id='username' placeholder="Test" value="{{session['username']}}" />
     </div>
     <script>
         const currentLocation = document.location.pathname
@@ -19,7 +19,7 @@
             // Establish a connection to the server using Socket.IO
             socket.on("connect", function() {
                 console.log(socket.on())
-                let username = document.getElementById("username").value;
+                let username = document.getElementById('username').value;
                 socket.emit("user_join", username);
                 console.log(socket.emit(), username )
             })
@@ -36,7 +36,8 @@
         socket.on("chat", function(data) {
             let ul = document.getElementById("chat-messages");
             let li = document.createElement("li");
-            li.appendChild(document.createTextNode(data[username] + ": " + data["message"]));
+            li.appendChild(document.createTextNode(data.username + ": " + data.message));
+            console.log("DATA", data)
             ul.appendChild(li);
             ul.scrollTop = ul.scrollHeight;
         })
