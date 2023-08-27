@@ -1,23 +1,14 @@
 
-
-
-
-
 <main>
-   
-    GROUP CHATTING!
-    <!-- conditionally render  -->
-    {% if group_chat_list %}
     <div id="chat">
         <ul id="chat-messages">
         </ul>
-        <label for="name" class="form__label">Test</label>
+    </div>
+    <div class="chat-input">
+        <label for="name" class="form__label"/>
         <input type="text" name="test_name"  id='message' placeholder="Test" class="" />
         <input type="hidden" name="username" id='username' placeholder="Test" value="{{username}}" />
     </div>
-
-    {% endif %}
-
     <script>
         const currentLocation = document.location.pathname
         const socket = io.connect({ autoConnect: true });
@@ -45,14 +36,14 @@
         socket.on("chat", function(data) {
             let ul = document.getElementById("chat-messages");
             let li = document.createElement("li");
-            li.appendChild(document.createTextNode(data["username"] + ": " + data["message"]));
+            li.appendChild(document.createTextNode(data[username] + ": " + data["message"]));
             ul.appendChild(li);
-            ul.scrolltop = ul.scrollHeight;
+            ul.scrollTop = ul.scrollHeight;
         })
 
         console.log("Document location", document.location.pathname)
         
 
-        document.getElementById("test").style.display = "block";
+        document.getElementById("chat").style.display = "block";
     </script>
 </main>
