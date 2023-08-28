@@ -40,7 +40,7 @@ def create_group_and_members():
 @APP.route('/group-chat/<int:group_id>')
 def view_group_chat(group_id):
     context = {
-    'combined_link_type': f'group-chat/{group_id}'
+    'combined_link_type': f'/group-chat/{group_id}'
 }
     
     return render_template("dashboard.html", all_users = person_model.Person.get_all_users(), chat_list = message_model.Message.logged_in_user_active_chats(session['user_id']), group_chat_list = group_model.Group.view_all_group_chat_per_user(session['user_id']), context=context)

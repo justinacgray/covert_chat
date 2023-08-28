@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<h1 class="title is-1" >{{session['user_name']}} {{session['user_id']}}</h1>
+<h1 class="title is-1" >{{session['username']}} {{session['user_id']}}</h1>
 
 
 
@@ -25,17 +25,29 @@
             {% endif %}
             {% endwith%}
                 <form action="/create-message" class="msger-inputarea" method="post">
-                    <select name="receiver_person_id">
-                        <option value="0">Choose an User</option>
+                
+                    {% if (context_two) and (request.path == context_two['message_url']) %}
+                    <textarea type="text" class="msger-input" name="content" placeholder="Enter your message..."> </textarea>
+                    <input type="hidden" name="receiver_person_id" value="{{person_id}}" />
+                    <button type="submit" class="msger-send-btn">Send</button>
+                    {% else %}
+
+                        <select name="receiver_person_id">
+                            <option value="0">Choose an User</option>
                         
                         {% for user in all_users%}
-                        <option value="{{user.user_id}}">{{user.first_name}}</option>
+                            {% if user.user_id != session['user_id']%}
+                            <option value="{{user.user_id}}">{{user.first_name}}</option>
+                            {% endif %}
                         {% endfor%}
                         
-                    </select>
+                    
+                        </select>
                     <textarea type="text" class="msger-input" name="content" placeholder="Enter your message..."> </textarea>
 
                     <button type="submit" class="msger-send-btn">Send</button>
+                {% endif %}
+              
                 </form>
 
             {% include 'message_base.html' %}
@@ -67,9 +79,6 @@
             </ul>
             <br/>
             <!-- loop through group names -->
-            <ul class="group1">
-                <li class="group1"><a href="/group-chat">Start a Group Chat</a></li>
-            </ul>
 
             <div>
                 <div id="landing">
