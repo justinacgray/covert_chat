@@ -27,12 +27,11 @@
                 {% if session['user_id'] == message.sender_person_id %}
                 <div class='chat-bubble sender-msg'>
                     
-                    {{message.content}}
+                    <span><input type="text" style="display:none;">{{message.content}}</span>
                     {{message.created_at}} ||
                     {{message.sender_person_id}} ||
                     {{message.receiver_person_id}} ||
-                    THIS IS THE SENDER {{person_id}}
-                    <span class="fa fa-pencil" title="Edit"><span/>
+                    <span class="fa fa-pencil" onclick="editMsg('{{message.message_id}}')" title="Edit"><span/>
                     <span class="fa-regular fa-trash" title="Delete"></span>
                     <form action="/dm/{{message.message_id}}" method= 'post'>
                         <button type="submit" class="fa fa-heart icon-larg fabutton">
@@ -45,12 +44,11 @@
                 </div>
                         {% else %}
                 <div class='chat-bubble receiver-msg'>
-                    {{message.content}}
+                    <span><input type="text" style="display:none;">{{message.content}}</span>
                     {{message.created_at}} ||
                     {{message.sender_person_id}} ||
                     {{message.receiver_person_id}}||
-                    THIS IS THE RECIEVER{{person_id}}
-                    <span class="fa fa-pencil" title="Edit"><span/>
+                    <span class="fa fa-pencil" onclick="editMsg('{{message.message_id}}')" title="Edit"><span/>
                     <span class="fa-regular fa-trash" title="Delete"></span>
                     <form action="/dm/{{message.message_id}}" method= 'post'>
                         <button type="submit" class="fa fa-heart icon-large fabutton">
@@ -71,3 +69,6 @@
                 </div>
     </body>
 </html>
+<script>
+
+</script>
