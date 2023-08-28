@@ -27,8 +27,9 @@ def new_msg():
         'receiver_person_id' : request.form['receiver_person_id'],
         'sender_user_id' : session['user_id']
     }
+    msg_receiver_id = message_dict['receiver_person_id']
     message_model.Message.create_message(message_dict)
-    return redirect('/dashboard')
+    return redirect(f'/dm/{msg_receiver_id}')
 
 
 
@@ -36,11 +37,14 @@ def new_msg():
 def direct_message(person_id):
     if 'user_id' not in session:
         return redirect("/")
+    context_two = {
+    'message_url': f'/dm/{person_id}'
+}
     return render_template('dashboard.html',
                         all_users = person_model.Person.get_all_users(), 
                         chat_list = message_model.Message.logged_in_user_active_chats(session['user_id']),
-                        message_hist =message_model.Message.read_all_messages_by_receiver(session['user_id'], person_id)
-                        )
+                        message_hist =message_model.Message.read_all_messages_by_receiver(session['user_id'], person_id), context_two = context_two,
+                        person_id = person_id )
 
 # @APP.route("/")
 

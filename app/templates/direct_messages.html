@@ -30,7 +30,8 @@
                     {{message.content}}
                     {{message.created_at}} ||
                     {{message.sender_person_id}} ||
-                    {{message.receiver_person_id}}
+                    {{message.receiver_person_id}} ||
+                    THIS IS THE SENDER {{person_id}}
                     <span class="fa fa-pencil" title="Edit"><span/>
                     <span class="fa-regular fa-trash" title="Delete"></span>
                     <form action="/dm/{{message.message_id}}" method= 'post'>
@@ -47,7 +48,8 @@
                     {{message.content}}
                     {{message.created_at}} ||
                     {{message.sender_person_id}} ||
-                    {{message.receiver_person_id}}
+                    {{message.receiver_person_id}}||
+                    THIS IS THE RECIEVER{{person_id}}
                     <span class="fa fa-pencil" title="Edit"><span/>
                     <span class="fa-regular fa-trash" title="Delete"></span>
                     <form action="/dm/{{message.message_id}}" method= 'post'>

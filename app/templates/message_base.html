@@ -8,19 +8,22 @@
 </head>
 <body>
 {% block msg_content %}
+    
     {% if message_hist %}
         <!-- include allows you to use a template in another template -->
         <div>
             {% include 'direct_messages.html' %} 
         </div>
-    {% elif link_type != context %}
+    {% elif (context) and (request.path == context['combined_link_type']) %}
         <div class="group-chat">
             {% include 'group_chat.html' %}
         </div>
     {% else %}
         Lets get started!
+        
     {% endif %}
 {% endblock msg_content %}
+
 
 </body>
 </html>
