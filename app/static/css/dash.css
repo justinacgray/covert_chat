@@ -39,7 +39,7 @@ html {
     overflow-y: auto;
     padding: 10px;
   }
-  .msgs-title, .grp-title{
+  .msgs-title, .grp-title, .start-group{
     display: flex;
     align-self: center;
     justify-content: center;
@@ -47,7 +47,7 @@ html {
     background-color: #9ad4d6; 
     border: 1px solid rgb(219, 218, 218);
     border-radius: 20px;
-    padding: 10px;
+    padding: 5px;
     font-weight: bold;
   }
 
@@ -173,10 +173,23 @@ ul.group1 {
   border:1px;
   border-radius: 20px;
   padding: 7px;
+  margin: 0 auto;
+  align-items:center;
   text-align: center;
+  display:flex;
+  flex-direction: column;
+  :-webkit-scrollbar{
+    display:none;
+    overflow-y: auto;}
+
 }
 li.group1{
-  padding: 7px;
+  width: 50%;
+  justify-content: center;
+
+ 
+
+  padding: 4px;
   border:1px;
   border-radius: 20px;
 }
@@ -185,6 +198,7 @@ li.group1:hover{
   background: #FFF;
   box-shadow: 5px 5px 15px #e3e3e3;
   border:1px;
+  width: 50%;
   border-radius: 20px;
 
 }
@@ -247,4 +261,78 @@ a:active {
 
 .chat-input{
   align-items: Baseline;
+}
+.scroll-list{
+  height: 20%;
+  overflow-y: scroll;
+}
+
+/* create group form */
+.group-form-field{
+  display: flex;
+  justify-content: center;
+  margin-bottom:10px;
+}
+.checkboxes{
+  margin-top:5px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+}
+input[type="checkbox"] {
+  appearance: none;
+  background-color: #fff;
+  margin: 0;
+  color: #00afb5;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid #1c8184;
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+  display: grid;
+  place-content: center;
+}
+input[type="checkbox"]::before {
+  content: "";
+  width: 0.75em;
+  height: 0.75em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em var(--form-control-color);
+}
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+  background-color: #95698d;
+  transform-origin: bottom left;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+input[type="checkbox"]:focus {
+  outline: max(2px, 0.15em) solid #95698d;
+  outline-offset: max(2px, 0.15em);
+}
+#group_name, #join-btn{
+  padding:7px; 
+  font-size:12px; 
+  text-align:center; 
+  border-width:2px; 
+  border-radius:20px; 
+  border-color:#609cab; 
+  box-shadow: 3px 2px 6px 0px rgba(42,42,42,.24); 
+  font-weight:normal; 
+  width: 50%;
+}
+#join-btn{
+  border-color:#95698d;
+  padding: 4px;
+  width: 30%;
+  background-color:#609cab;
+  margin-top:10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.join-btn-prnt{
+  text-align:center;
 }
