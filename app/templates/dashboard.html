@@ -57,41 +57,44 @@
 
         <aside class="active-chat-list">
             <div class="msgs-title subtitle is-4"> Messages </div>
-            <ul class="group1">
-                
-                {% for person in chat_list %}
-                <li class="group1">
-                    <a href="/dm/{{person.user_id}}">{{person.username}}</a>
-                </li>
-                {% endfor %}
-            </ul>
+            <div class="scroll-list">
+                <ul class="group1">
+                    {% for person in chat_list %}
+                        <li class="group1">
+                            <a href="/dm/{{person.user_id}}">{{person.username}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
 
             <br/>
             <br/>
                 <div class="grp-title subtitle is-4"> Current Groups </div>
-            <ul class="group1">
-                {% for group_chat in group_chat_list %}
-                <li class="group1">
-                <a href="/group-chat/{{group_chat.group_id}}">{{group_chat.group_name}}</a>
-                </li>
-                {% endfor%}
-
-            </ul>
+                <div class="scroll-list">
+                    <ul class="group1">
+                        {% for group_chat in group_chat_list %}
+                    <li class="group1">
+                        <a href="/group-chat/{{group_chat.group_id}}">{{group_chat.group_name}}</a>
+                    </li>
+                        {% endfor%}
+                    </ul>
+                </div>
             <br/>
             <!-- loop through group names -->
 
             <div>
                 <div id="landing">
+                    <h3 class="start-group subtitle is-5"> Create a Group Chat </h3>
                     <!-- todo when clicking the button a form should display to create a name, add users -->
                     <form action="/create-group-chat" id = "group_chat" class="form" method="post">
-                        <div>
-                            <label for="name" class="form__label">Name</label>
-                            <input type="text" name="group_name" id="group_name" placeholder="Name" class="" />
+                        <div class="group-form-field">
+                            <label for="name" class="form__label"></label>
+                            <input type="text" name="group_name" id="group_name" placeholder="Enter Group Name" class="" />
                         </div>
             
                         <div>
                             {% for user in all_users%}
-                            <label>
+                            <label class="checkboxes">
                                 {% if user.user_id != session['user_id']%}
                                 <input id="user_id" type="checkbox" name="group_members"
                                     value="{{user.user_id}}">{{user.username}}
@@ -99,7 +102,9 @@
                             </label>
                             {% endfor%}
                         </div>
-                        <button id="join-btn">Create Group</button>
+                        <div class="join-btn-prnt">
+                            <button id="join-btn">Create Group</button>
+                        </div>
                     </form>
                 </div>
                 
