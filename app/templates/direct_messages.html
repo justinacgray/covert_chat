@@ -26,39 +26,40 @@
             <main class="chat-container" >
                 {% if session['user_id'] == message.sender_person_id %}
                 <div class='chat-bubble sender-msg'>
+                    <span style="display:none;" id="rec-message"><input type="text" value="{{message.content}}"></span>
+
+                    <span id="update_message">{{message.content}}</span>
                     
-                    <span><input type="text" style="display:none;">{{message.content}}</span>
-                    {{message.created_at}} ||
                     {{message.sender_person_id}} ||
                     {{message.receiver_person_id}} ||
-                    <span class="fa fa-pencil" onclick="editMsg('{{message.message_id}}')" title="Edit"><span/>
+                    <span id="edit_button" class="fa fa-pencil" onclick="editMsg('{{message.message_id}}')" title="Edit"><span/>
                     <span class="fa-regular fa-trash" title="Delete"></span>
-                    <form action="/dm/{{message.message_id}}" method= 'post'>
+                    <form id="form_submit" action="/dm/{{message.message_id}}" method= 'post'>
+                        <input type="hidden" name="receiver_person_id" value="{{message.receiver_person_id}}" >
                         <button type="submit" class="fa fa-heart icon-larg fabutton">
                             <i name="message_id" 
                             value="{{message.message_id}}">
                         </i>
-                        <span>You have {{message.liked_by|length}} likes</span>   
+                        <span>{{message.liked_by|length}} likes</span>   
                         </button>
                     </form>
                 </div>
+                <p class='sender-timestamp'>{{message.created_at.strftime('%m-%d-%Y %T')}}</p>
                         {% else %}
                 <div class='chat-bubble receiver-msg'>
                     <span><input type="text" style="display:none;">{{message.content}}</span>
-                    {{message.created_at}} ||
                     {{message.sender_person_id}} ||
                     {{message.receiver_person_id}}||
-                    <span class="fa fa-pencil" onclick="editMsg('{{message.message_id}}')" title="Edit"><span/>
-                    <span class="fa-regular fa-trash" title="Delete"></span>
                     <form action="/dm/{{message.message_id}}" method= 'post'>
                         <button type="submit" class="fa fa-heart icon-large fabutton">
                             <i name="message_id" 
                             value="{{message.message_id}}">
-                            </i>
-                            <span>You have {{message.liked_by|length}} likes</span>
-                        </button>
-                    </form>
-                </div>
+                        </i>
+                        <span>{{message.liked_by|length}} likes</span>
+                    </button>
+                </form>
+            </div>
+            <p class="receiver-timestamp">{{message.created_at.strftime('%m-%d-%Y %T')}}</p>
                         {% endif %}
             </main>
                     {% endfor %}

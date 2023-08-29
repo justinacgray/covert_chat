@@ -46,8 +46,19 @@ def direct_message(person_id):
                         message_hist =message_model.Message.read_all_messages_by_receiver(session['user_id'], person_id), context_two = context_two,
                         person_id = person_id )
 
-# @APP.route("/")
+@APP.route("/dm/update/<int:message_id>", methods=['POST'])
+def updateMessage(message_id):
+    if 'user_id' not in session:
+        return redirect("/")
+    message_model.Message.update_message(message_id)
+    receiver_id = request.form['receiver_person_id']
+    return redirect(f'/dm/{receiver_id}')
 
 
-# @APP.route("/")
-
+@APP.route("/dm/delete/<int:message_id>")
+def deleteMessage(message_id):
+    if 'user_id' not in session:
+        return redirect("/")
+    message_model.Message.delete_message(message_id)
+    logged_user_message_id = request.form['replace']
+    return redirect(f'/dm/{logged_user_message_id}')

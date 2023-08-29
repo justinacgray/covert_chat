@@ -138,9 +138,17 @@ html {
   border: 1px;
   border-radius: 10px;
   margin: 10px;
-  box-shadow:5px 5px 5px #bfbfbf;
-  
+  box-shadow:5px 5px 5px #bfbfbf; 
 }
+
+.sender-timestamp {
+  align-self: flex-start;
+  padding: 5px;
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+
 .sender-msg {
   background-color: #DBCBD8;
   align-self: flex-start;
@@ -149,6 +157,15 @@ html {
 .receiver-msg {
   background-color: #9ad4d6;
   align-self: flex-end;
+}
+
+.receiver-timestamp {
+  align-self: flex-end;
+  padding: 5px;
+  font-size: 12px;
+  margin-right: 5px;
+
+
 }
 ul.group1 {
   background: #FFF;

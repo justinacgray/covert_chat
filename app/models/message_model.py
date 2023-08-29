@@ -61,7 +61,7 @@ class Message:
             LEFT JOIN persons AS receiver ON m.receiver_user_id = receiver.user_id
             LEFT JOIN likes ON m.message_id = likes.message_id
             WHERE (m.sender_user_id = %(user_id)s  and m.receiver_user_id = %(other_user_id)s )
-            or (m.sender_user_id = %(other_user_id)s  and m.receiver_user_id = %(user_id)s  )
+            OR (m.sender_user_id = %(other_user_id)s  and m.receiver_user_id = %(user_id)s  )
             ORDER BY created_at DESC
             ;
         '''
@@ -90,12 +90,31 @@ class Message:
         
         
     @classmethod
-    def update_message(cls):
-        pass
+    def update_message(cls,message_id):
+        message_dict = {
+            "message_id" : message_id
+        }
+        query = """
+        UPDATE messages
+        SET content = %(content)s
+        WHERE message_id = %(message_id)s
+        ;"""
+
+        result= MySQLConnection(cls.db).query_db(query, message_dict)
+        print("updated message ===>", result)
+        return result
     
     @classmethod
-    def delete_message(cls):
-        pass
+    def delete_message(cls, message_id):
+        message_dict = {
+            'message_id' : message_id
+        }
+        query = """  
+        DELETE FROM messages
+        WHERE message_id = %(message_id)s
+        ;"""
+        result= MySQLConnection(cls.db).query_db(query, message_dict)
+        return result
     
 
     # parse message_id
