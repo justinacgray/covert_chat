@@ -24,39 +24,52 @@
             {% for message in message_hist %}
             <main class="chat-container" >
                 {% if session['user_id'] == message.sender_person_id %}
-                <div class='chat-bubble sender-msg'>
-                    <span style="display:none;" id="rec-message"><input type="text" value="{{message.content}}"></span>
+                <div class='chat-bubble sender-msg' >
 
-                    <span id="update_message">{{message.content}}</span>
+                    <!-- this span is not seen at first -->
+                    <span style="display:none;" id="sender-message-{{message.message_id}}">
+                        <input type="text" id="contentMsg-{{message.message_id}}" value="{{message.content}}">
+                    </span>
+                    
+                    <!-- this span is seen at first -->
+                    <span id="update-sender-message-{{message.message_id}}">{{message.content}}</span>
                     
                     {{message.sender_person_id}} ||
                     {{message.receiver_person_id}} ||
-                    <span id="edit_button" class="fa fa-pencil" onclick="editMsg('{{message.message_id}}')" title="Edit"><span/>
-                    <span class="fa-regular fa-trash" title="Delete"></span>
-                    <form id="form_submit" action="/dm/{{message.message_id}}" method= 'post'>
+
+                    <span class="fa fa-pencil edit-button" data-message-id="{{message.message_id}}" title="Edit"></span>
+
+
+                    <span class="fa fa-trash" title="Delete">
+                        <input type="hidden" name="receiver_person_id" id='delete_message_id' value="{{message.receiver_person_id}}">
+                    </span>
+
+                    <form action="/dm/{{message.message_id}}" method= 'post'>
                         <input type="hidden" name="receiver_person_id" value="{{message.receiver_person_id}}" >
                         <button type="submit" class="fa fa-heart icon-larg fabutton">
-                            <i name="message_id" 
-                            value="{{message.message_id}}">
-                        </i>
+                        
                         <span>{{message.liked_by|length}} likes</span>   
                         </button>
                     </form>
+
                 </div>
                 <p class='sender-timestamp'>{{message.created_at.strftime('%m-%d-%Y %T')}}</p>
-                        {% else %}
+                        
+                
+                {% else %}
                 <div class='chat-bubble receiver-msg'>
                     <span><input type="text" style="display:none;">{{message.content}}</span>
                     {{message.sender_person_id}} ||
                     {{message.receiver_person_id}}||
                     <form action="/dm/{{message.message_id}}" method= 'post'>
-                        <button type="submit" class="fa fa-heart icon-large fabutton">
-                            <i name="message_id" 
-                            value="{{message.message_id}}">
-                        </i>
+                        <button type="submit" class="fa fa-heart icon-large fabutton" name="message_id" 
+                        value="{{message.message_id}}">
+                        
                         <span>{{message.liked_by|length}} likes</span>
                     </button>
                 </form>
+
+
             </div>
             <p class="receiver-timestamp">{{message.created_at.strftime('%m-%d-%Y %T')}}</p>
                         {% endif %}
@@ -69,6 +82,3 @@
                 </div>
     </body>
 </html>
-<script>
-
-</script>

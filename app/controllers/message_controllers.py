@@ -50,9 +50,11 @@ def direct_message(person_id):
 def updateMessage(message_id):
     if 'user_id' not in session:
         return redirect("/")
-    message_model.Message.update_message(message_id)
-    receiver_id = request.form['receiver_person_id']
-    return redirect(f'/dm/{receiver_id}')
+    print("REQUEST.json", request.json)
+    message_model.Message.update_message(request.json)
+    # receiver_id = request.form['receiver_person_id']
+    # return redirect(f'/dm/{receiver_id}')
+    return redirect(f'/dashboard')
 
 
 @APP.route("/dm/delete/<int:message_id>")
