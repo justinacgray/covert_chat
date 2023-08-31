@@ -26,9 +26,9 @@ class Group:
         '''
         
         results = MySQLConnection(db).query_db(query, parsed_group_dict)
-        print("RESULTS group_data ====> ", results)
+        # print("RESULTS group_data ====> ", results)
         new_group_id = parsed_group_dict['group_id']
-        print("NEW GROUP DATA ====>", new_group_id)
+        # print("NEW GROUP DATA ====>", new_group_id)
         return new_group_id
     
 
@@ -49,7 +49,7 @@ class Group:
         results = MySQLConnection(db).query_db(query, group_id_dict)
         for one_chat_group in results:
             group_members.append(cls(one_chat_group))
-        print("######## USER CHAT LIST ########", group_members)
+        # print("######## USER CHAT LIST ########", group_members)
         return group_members
 
     

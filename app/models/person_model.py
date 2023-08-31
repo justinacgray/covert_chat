@@ -60,11 +60,11 @@ class Person:
         SELECT * FROM persons
         ;"""
         result = connectToMySQL(cls.db).query_db(query)
-        print("********result *********", result)
+        # print("********result *********", result)
         users = []
         for row in result:
             users.append(cls(row))
-        print("************ users ===>", users)
+        # print("************ users ===>", users)
         return users
     
     @classmethod
@@ -76,7 +76,7 @@ class Person:
         WHERE user_id = %(user_id)s
         ;"""
         result= connectToMySQL(cls.db).query_db(query,data)
-        print("===> user result ===>", result)
+        # print("===> user result ===>", result)
         return result
     
     # eventually be able to update user profile

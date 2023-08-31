@@ -52,9 +52,9 @@ def updateMessage(message_id):
         return redirect("/")
     print("REQUEST.json", request.json)
     message_model.Message.update_message(request.json)
-    # receiver_id = request.form['receiver_person_id']
-    # return redirect(f'/dm/{receiver_id}')
-    return redirect(f'/dashboard')
+    receiver_id = request.json['receiver_person_id']
+    # todo fix redirect. updates but doesn't redirect 
+    return redirect(f'/dm/{receiver_id}')
 
 
 @APP.route("/dm/delete/<int:message_id>")

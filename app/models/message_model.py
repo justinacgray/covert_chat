@@ -34,7 +34,7 @@ class Message:
         message_id = connectToMySQL(cls.db).query_db(query, parsed_data)
         if str(message_id) == 'False':
             return False
-        print("message created id", message_id)
+        # print("message created id", message_id)
         return True
     
     @classmethod
@@ -66,7 +66,7 @@ class Message:
             ;
         '''
         results = MySQLConnection(cls.db).query_db(query, user_data_dict)
-        pprint(results, width=1, sort_dicts=False)
+        # pprint(results, width=1, sort_dicts=False)
         # this for scalability 
         # handles cases where the same message might appear multiple times due to being 
         # associated with different likes.
@@ -85,22 +85,24 @@ class Message:
                 one_message.liked_by.append(row['liked_by_user_id'])
 
             
-        print("all messages by receiver ----->", all_messages)
+        # print("all messages by receiver ----->", all_messages)
         return all_messages
         
         
     @classmethod
-    def update_message(cls,message_id):
-        message_dict = {
-            "message_id" : message_id
-        }
+    def update_message(cls,message_data):
+        
+        # message_data = {
+        #     "content" : message_content
+        # }
+        
         query = """
         UPDATE messages
         SET content = %(content)s
         WHERE message_id = %(message_id)s
         ;"""
 
-        result= MySQLConnection(cls.db).query_db(query, message_dict)
+        result= MySQLConnection(cls.db).query_db(query, message_data)
         print("updated message ===>", result)
         return result
     
@@ -163,12 +165,12 @@ class Message:
             ;
         '''
         results = MySQLConnection(cls.db).query_db(query, user_data)
-        print("USER chats --->", user_data)
-        print("****** RESULTS *****", results)
+        # print("USER chats --->", user_data)
+        # print("****** RESULTS *****", results)
         chat_list = []
         for row in results:
             chat_list.append(person_model.Person(row))
-        print("$$$$$$$ chat list $$$$$", chat_list)
+        # print("$$$$$$$ chat list $$$$$", chat_list)
         return chat_list
     
     

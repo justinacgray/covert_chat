@@ -30,7 +30,7 @@ class Like:
             VALUES ( %(message_id)s, %(logged_in_user_id)s );
         '''
         results = MySQLConnection(cls.db).query_db(query, message_dict)
-        print("RESULTS FROM LIKE", results)
+        # print("RESULTS FROM LIKE", results)
         
         return results
         
@@ -49,7 +49,7 @@ class Like:
             ;        
         '''
         results = MySQLConnection(cls.db).query_db(query, message_dict)
-        print("RESULTS FROM LIKE", results)
+        # print("RESULTS FROM LIKE", results)
         
         return results
     

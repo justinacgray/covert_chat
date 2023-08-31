@@ -29,6 +29,7 @@
                     <!-- this span is not seen at first -->
                     <span style="display:none;" id="sender-message-{{message.message_id}}">
                         <input type="text" id="contentMsg-{{message.message_id}}" value="{{message.content}}">
+                        <input type="hidden" name="receiver_person_id" id='receiver_person_id' value="{{message.receiver_person_id}}">
                     </span>
                     
                     <!-- this span is seen at first -->
