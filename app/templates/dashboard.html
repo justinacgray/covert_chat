@@ -2,21 +2,21 @@
 {% extends "main.html" %}
 
 {% block content %}
-
-<h1 class="title is-1" >{{session['username']}} {{session['user_id']}}</h1>
+{# <h1 class="title is-1" >{{session['username']}} {{session['user_id']}}</h1> #}
 
 
 
 <main class="main-dash container is-widescreen">
     <header class="msger-header ">
-        <div class="msger-header-title subtitle is-2 ">
-            <p class="has-text-centered">CovertChat</p>
+        <div class="msger-header-title subtitle is-4 ">
+            <p class="has-text-centered">Join the Conversation</p>
         </div>
     </header>
     
     <section class="inner-container">
         
         <aside class="current-chat">
+         {% include 'message_base.html' %}
             {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
@@ -48,16 +48,17 @@
                     <button type="submit" class="msger-send-btn">Send</button>
                 {% endif %}
               
-                </form>
-
-            {% include 'message_base.html' %}
-                
-    
+                </form>    
         </aside>
 
         <aside class="active-chat-list">
-            <div class="msgs-title subtitle is-4"> Messages </div>
-            <div class="scroll-list">
+            <div class="icons">
+                <i class="icon fa fa-regular fa-envelope icon" id="icon1"></i>
+                <i class="icon fa fa-plus " id="icon2"></i>
+                <i class="icon fa fa-regular fa-users" id="icon3"></i>
+                
+            </div>
+            <div class="scroll-list" id="list1">
                 <ul class="group1">
                     {% for person in chat_list %}
                         <li class="group1">
@@ -66,11 +67,7 @@
                     {% endfor %}
                 </ul>
             </div>
-
-            <br/>
-            <br/>
-                <div class="grp-title subtitle is-4"> Current Groups </div>
-                <div class="scroll-list">
+            <div class="scroll-list" id="list2">
                     <ul class="group1">
                         {% for group_chat in group_chat_list %}
                     <li class="group1">
@@ -78,13 +75,12 @@
                     </li>
                         {% endfor%}
                     </ul>
-                </div>
+            </div>
             <br/>
             <!-- loop through group names -->
 
             <div>
-                <div id="landing">
-                    <h3 class="start-group subtitle is-5"> Create a Group Chat </h3>
+                <div class='scroll-list' id="list3">
                     <!-- todo when clicking the button a form should display to create a name, add users -->
                     <form action="/create-group-chat" id = "group_chat" class="form" method="post">
                         <div class="group-form-field">

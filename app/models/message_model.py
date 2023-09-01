@@ -62,7 +62,7 @@ class Message:
             LEFT JOIN likes ON m.message_id = likes.message_id
             WHERE (m.sender_user_id = %(user_id)s  and m.receiver_user_id = %(other_user_id)s )
             OR (m.sender_user_id = %(other_user_id)s  and m.receiver_user_id = %(user_id)s  )
-            ORDER BY created_at DESC
+            ORDER BY created_at ASC
             ;
         '''
         results = MySQLConnection(cls.db).query_db(query, user_data_dict)

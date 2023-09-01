@@ -7,6 +7,8 @@
     <title>Document</title>
     <link rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet" type='text/css'>
+
     <link
     rel="stylesheet"
     href="{{url_for('static',filename='css/dash.css')}}"
@@ -15,30 +17,34 @@
 
 
     <script src="{{url_for('static', filename='/js/script.js')}}" async></script>
+    <script src="{{url_for('static', filename='/js/iconscript.js')}}" defer></script>
 </head>
 <body>
-    <header class="hero has-background-black">
-        
-        <div class="hero-body">
-            <section class="container is-flex is-align-items-center is-justify-content-center ">
+    <header class="hero has-background-#">
+            <section>
                 {% if session.user_id %}
-                <header>
+                <header class="header1">
+                    <h1 class="title is-2 has-text-white">CovertChat</h1>
                     <nav>
-                    <a class="button has-text-primary" href="/dashboard">Home</a> 
-                        <a class="button has-text-primary" href="/logout">Log Out</a>
-                        BUILD OUT MORE NAV BAR
+                    <a class="button is-rounded has-text-warning is-inverted" href="/dashboard">Home</a> 
+                        <a class="navbut button has-text-warning is-rounded" href="/logout">Log Out</a>
                     </nav>
+                </header>
+                {% else %}
+                <header class="header1">
+                    <h1 class="title is-2 has-text-white">CovertChat</h1>
                 </header>
     
                 {% endif %}
             </section>
-        </div>
     </header>
-    block header starts here
     {% block content %}
     can't see content inside here
     {% endblock content %}
-    can see part after blocked content - FOOTER 
+    
+    <div class="bottom-footer">
+        <p> Copyright DUHDUHDUHD</p>
+    </div>
     
 </body>
 </html>
