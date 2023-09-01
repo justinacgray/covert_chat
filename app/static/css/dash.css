@@ -1,6 +1,12 @@
 html {
     box-sizing: border-box;  
 }
+/* Colors for theme */
+/* #DBCBD8 - Thistle (purple), 
+#9AD4D6 - Tiffay Blue, 
+#2660A4 - Lapis Lazuli(blue), 
+#475841 - Feldgrau(grenish olive), 
+#EEC643 - Saffron(goldish) */
 
   *,
   *:before,
@@ -18,14 +24,27 @@ html {
     border-radius: 20px;
 }
 
+.header1{
+  display: flex;
+  justify-content: space-between;
+  background-color: #2660A4;
+  width:100%;
+  height: 75px;
+  padding: 20px;
+  align-items: center;
+  margin-bottom: 30px;
+
+}
+
 .msger-header {
     display: flex;
     padding: 10px;
     justify-content: center;
     border-bottom: var(--border);
-    background-image: linear-gradient(to right, #9ad4d6  ,#00afb5);
+    background-image: linear-gradient(to right, #2660A4  ,#00afb5);
     border-radius: 20px 20px 0px 0px;
-    height: 70px;
+    height: 40px;
+   
    
   }
   .msger-header-title{
@@ -44,7 +63,7 @@ html {
     align-self: center;
     justify-content: center;
     color: white;
-    background-color: #9ad4d6; 
+    background-color: #2660A4; 
     border: 1px solid rgb(219, 218, 218);
     border-radius: 20px;
     padding: 5px;
@@ -57,9 +76,10 @@ html {
     height: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    padding: 10px;
     gap:20px;
     box-shadow: 0 5px 10px #9c9c9c inset;
+    border-radius: 0px 0px 20px 20px;
 
 }
 
@@ -150,12 +170,12 @@ html {
 
 
 .sender-msg {
-  background-color: #DBCBD8;
+  background-image: linear-gradient(to right, #DBCBD8 ,#98688f);
   align-self: flex-start;
 }
 
 .receiver-msg {
-  background-color: #9ad4d6;
+  background-image: linear-gradient(to right, #2660A4  ,#00afb5);
   align-self: flex-end;
 }
 
@@ -184,24 +204,24 @@ ul.group1 {
 
 }
 li.group1{
-  width: 50%;
+  width: 100%;
   justify-content: center;
-
- 
-
   padding: 4px;
-  border:1px;
-  border-radius: 20px;
+  border:1px solid transparent;
+  border-bottom: 1px solid #d5d5d5;
 }
 li.group1:hover{
   transform: scale(1.1);
   background: #FFF;
   box-shadow: 5px 5px 15px #e3e3e3;
   border:1px;
-  width: 50%;
-  border-radius: 20px;
+  border-radius: 20px transparent;
+  width: 99%;
+  border-bottom: 1px solid #475841;
+
 
 }
+
 
 a:link {
   color:#DBCBD8;
@@ -220,10 +240,10 @@ a:hover {
   background-color: transparent;
 }
 
-a:active {
-  color: yellow;
-  background-color: transparent;
-  text-decoration: underline;
+a:active, a.active {
+  color:#475841;
+  padding: 4px;
+
 }
 
 /* Chat Window */
@@ -263,8 +283,20 @@ a:active {
   align-items: Baseline;
 }
 .scroll-list{
-  height: 20%;
+  height: 90%;
   overflow-y: scroll;
+  display: none;
+}
+.icons{
+  border-bottom: 2px solid #EEC643;
+  width: 100%;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+.icon {
+  margin: 10px;
+
 }
 
 /* create group form */
@@ -335,4 +367,10 @@ input[type="checkbox"]:focus {
 }
 .join-btn-prnt{
   text-align:center;
+}
+.bottom-footer{
+  background-color: #EEC643;
+  height: 50px;
+  margin-top:100px;
+
 }
