@@ -24,7 +24,7 @@
             {% for message in message_hist %}
             <main class="chat-container" >
                 {% if session['user_id'] == message.sender_person_id %}
-                <div class='chat-bubble sender-msg' >
+                <div class='chat-bubble sender-msg' id='{{message.message_id}}'>
 
                     <!-- this span is not seen at first -->
                     <span style="display:none;" id="sender-message-{{message.message_id}}">
@@ -41,11 +41,10 @@
                     <span class="fa fa-pencil edit-button" data-message-id="{{message.message_id}}" title="Edit"></span>
 
 
-                    <span class="fa fa-trash" title="Delete">
-                        <input type="hidden" name="receiver_person_id" id='delete_message_id' value="{{message.receiver_person_id}}">
+                    <span class="fa fa-trash" name="receiver_person_id" value="{{message.receiver_person_id}}" title="Delete" onclick="openDeleteModal('{{message.message_id}}')" id="delete-message-modal">
                     </span>
 
-                    <form action="/dm/{{message.message_id}}" method= 'post'>
+                    <form action="/dm/{{message.message_id}}" method= 'post' >
                         <input type="hidden" name="receiver_person_id" value="{{message.receiver_person_id}}" >
                         <button type="submit" class="fa fa-heart icon-larg fabutton">
                         
@@ -55,6 +54,25 @@
 
                 </div>
                 <p class='sender-timestamp'>{{message.created_at.strftime('%m-%d-%Y %T')}}</p>
+
+                <div class="modal">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                            <p class="modal-card-title" id="delete_id"></p>
+                        <button class="delete" aria-label="close"></button>
+                        </header>
+                        <section class="modal-card-body">
+                            <h3 class="subtitle mb-6">Are you sure you want to delete message?</h3>
+                        </section>
+                        <footer class="modal-card-foot">
+                            
+                            <button class="button is-danger" onclick="deleteMessageById()" >Yes, Delete</button>
+
+                            <button class="button is-dark" onclick="closeDeleteModal()" >No, Cancel</button>
+                        </footer>
+                    </div>
+                </div>
                         
                 
                 {% else %}
@@ -69,8 +87,6 @@
                         <span>{{message.liked_by|length}} likes</span>
                     </button>
                 </form>
-
-
             </div>
             <p class="receiver-timestamp">{{message.created_at.strftime('%m-%d-%Y %T')}}</p>
                         {% endif %}

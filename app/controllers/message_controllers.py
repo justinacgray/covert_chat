@@ -53,6 +53,7 @@ def updateMessage(message_id):
     print("REQUEST.json", request.json)
     message_model.Message.update_message(request.json)
     receiver_id = request.json['receiver_person_id']
+    print("receiver id update **", receiver_id)
     # todo fix redirect. updates but doesn't redirect 
     return redirect(f'/dm/{receiver_id}')
 

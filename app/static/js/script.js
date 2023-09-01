@@ -1,12 +1,15 @@
 console.log("Shalom!, We are Connected!")
-// const deleteRecipeBtn = document.querySelector('#delete-recipe-modal')
-// const modalBkgd = document.querySelector('.modal-background')
-// const modal = document.querySelector('.modal')
-// const messageID = document.querySelector(`#contentMsg-${message_id}`).value
+const deleteMessageBtn = document.querySelector('#delete-message-modal')
+const modalBkgd = document.querySelector('.modal-background')
+const modal = document.querySelector('.modal')
 const receiverID = document.getElementById('receiver_person_id')
 const editButtons = document.querySelectorAll(".edit-button");
+// const messageID = document.getElementById("message_id")
 
 
+
+console.log("REEIVERID ***", receiverID.value)
+// console.log("MESSAGEID ***", messageID.innerText)
 // Loop through each edit button and add click event listener
 editButtons.forEach(editButton => {
     editButton.addEventListener('click', function(e) {
@@ -48,7 +51,7 @@ const handleChange = (message_id) => {
             const updated_input = JSON.stringify({
                 "message_id": message_id,
                 "content": updatedValueInput,
-                "receiver_person_id": receiverID,
+                "receiver_person_id": receiverID.value,
             });
             updateMsg(message_id, updated_input)
         }
@@ -66,6 +69,12 @@ const updateMsg = (message_id, updated_input_json) => {
     })
     .then((response) => {
         console.log("RESPONSE", response)
+        if (response.ok) {
+            // If the response is successful, perform the redirection
+            window.location.href = `/dm/${receiverID.value}`;
+        } else {
+            console.log("Response not OK");
+        }
         return response.json()
     }) 
     .then((data) => {
@@ -81,8 +90,7 @@ const updateMsg = (message_id, updated_input_json) => {
 const openDeleteModal = (message_id) => {
     console.log("open modal")
     if(modal) {
-        recipeID.innerText = recipe_id
-        recipeName.innerText = recipe_name
+        console.log("message id", message_id)
         modal.classList.add("is-active")
     }
     
@@ -95,22 +103,25 @@ const closeDeleteModal = () => {
     }
 }
 
+// todo need to grab the message-id
+const deleteMessageById = () => {
+    const messageID = document.querySelector(`#contentMsg-${message_id}`);
 
-const deleteRecipeById = () => {
-    fetch(`/recipes/delete/${recipeID.innerText}`, {
-        method : "POST"
-    })
-    .then((response) => {
-        console.log("RESPONSE", response)
-        response.json()
-        closeDeleteModal()
-        const recipe_row = document.getElementById(recipeID.innerText)
-        recipe_row.remove()
-    }) 
-    .then((error) => {
-        console.log("ERROR", error)
-    }) 
-    console.log(recipeID.innerText)
+    console.log(`/dm/delete/${receiverID.innerText}`)
+    console.log(messageID)
+    // fetch(`/dm/delete/${receiverID.innerText}`, {
+    //     method : "POST"
+    // })
+    // .then((response) => {
+    //     console.log("RESPONSE", response)
+    //     response.json()
+    //     closeDeleteModal()
+    //     // const recipe_row = document.getElementById(recipeID.innerText)
+    //     // recipe_row.remove()
+    // }) 
+    // .then((error) => {
+    //     console.log("ERROR", error)
+    // }) 
 }
 
 
