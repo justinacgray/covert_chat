@@ -1,13 +1,13 @@
 
-<main>
+<main class="group-chat">
     <div id="chat">
         <ul id="chat-messages">
         </ul>
     </div>
     <div class="chat-input">
         <label for="name" class="form__label"/>
-        <input type="text" name="test_name"  id='message' placeholder="Test" class="" />
-        <input type="hidden" name="username" id='username' placeholder="Test" value="{{session['username']}}" />
+        <input type="text" name="test_name"  id='message' placeholder="Start chatting..." class="" />
+        <input type="hidden" name="username" id='username' value="{{session['username']}}" />
     </div>
     <script>
         const currentLocation = document.location.pathname

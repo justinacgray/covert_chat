@@ -17,6 +17,7 @@
         
         <aside class="current-chat">
          {% include 'message_base.html' %}
+
             {% with messages = get_flashed_messages() %}
             {% if messages %}
                 {% for message in messages %}
@@ -24,10 +25,14 @@
                 {% endfor %}
             {% endif %}
             {% endwith%}
-                <form action="/create-message" class="msger-inputarea" method="post">
+                {% if context %}
+
+                {% else %}
                 
+                <form action="/create-message" class="msger-inputarea" method="post">
+
                     {% if (context_two) and (request.path == context_two['message_url']) %}
-                    <textarea type="text" class="msger-input" name="content" placeholder="Enter your message..."> </textarea>
+                    <input type="text" class="msger-input" name="content" placeholder="Enter your message..."> </input>
                     <input type="hidden" name="receiver_person_id" value="{{person_id}}" />
                     <button type="submit" class="msger-send-btn">Send</button>
                     {% else %}
@@ -43,19 +48,20 @@
                         
                     
                         </select>
-                    <textarea type="text" class="msger-input" name="content" placeholder="Enter your message..."> </textarea>
+                    <input type="text" class="msger-input" name="content" placeholder="Enter your message..."> </input>
 
                     <button type="submit" class="msger-send-btn">Send</button>
                 {% endif %}
               
                 </form>    
+                {% endif %}
         </aside>
 
         <aside class="active-chat-list">
             <div class="icons">
                 <i class="icon fa fa-regular fa-envelope icon" id="icon1"></i>
-                <i class="icon fa fa-plus " id="icon2"></i>
-                <i class="icon fa fa-regular fa-users" id="icon3"></i>
+                <i class="icon fa fa-regular fa-users" id="icon2"></i>
+                <i class="icon fa fa-plus " id="icon3"></i>
                 
             </div>
             <div class="scroll-list" id="list1">

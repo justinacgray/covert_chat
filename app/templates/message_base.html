@@ -11,7 +11,7 @@
     
     {% if message_hist %}
         <!-- include allows you to use a template in another template -->
-        <div>
+        <div class="container-height">
             {% include 'direct_messages.html' %} 
         </div>
     {% elif (context) and (request.path == context['combined_link_type']) %}

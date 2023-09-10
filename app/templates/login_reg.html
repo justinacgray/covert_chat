@@ -1,19 +1,19 @@
+{% extends "main.html" %}
 
-        {% extends "main.html" %}
+{% block content %}
 
-        {% block content %}
-        
-        <!-- REGISTER -->
-        <section class="section">
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <p> {{message}}</p>
-                    {% endfor %}
-                {% endif %}
-            {% endwith%}
-            <div class="columns is-flex is-justify-content-center">
+<!-- REGISTER -->
+<section class="section">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <p> {{message}}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith%}
+    <div class="columns is-flex is-justify-content-center">
 
+<<<<<<< Updated upstream
                 
                 <form action="/register" method="post" class="column is-one-third">
                     <div class="notification has-background-grey-darker">
@@ -96,10 +96,35 @@
                                 </button>
                             </p>
                         </div>
+=======
+>>>>>>> Stashed changes
 
+        <form action="/register" method="post" class="column is-one-third">
+        <div class="login-bg"
+                <h2 class="is-size-4">Register</h2>
+                    <div class="control">
+                        <label class="label">First Name</label>
+                        <input class="input" type="text" name="first_name" placeholder="First Name">
+                        <label class="label">Last Name</label>
+                        <input class="input" type="text" name="last_name" placeholder="Last Name">
+                        <label class="label">Age</label>
+                        <input class="input" type="number" name="age" placeholder="1">
+                        <label class="label">Email</label>
+                        <input class="input" type="email" name="email" placeholder="Email">
+                        <label class="label">Username</label>
+                        <input class="input" type="text" name="username" placeholder="Username">
+                        <label class="label">Password</label>
+                        <input class="input" type="password" name="password" placeholder="Password">
+                        <label class="label">Confirm Password</label>
+                        <input class="input" type="password" name="confirm_password" placeholder="Confirm Password">
                     </div>
-                </form>
+                        <button class="button has-text-black">
+                            Register
+                        </button>
+                    </p>
+                </div>
 
+<<<<<<< Updated upstream
                 <!-- LOGIN -->
                 <form action="/login" method="post" class="column is-one-third">
                     <div class="notification has-background-grey-darker">
@@ -145,12 +170,52 @@
                     </div>
                 </form>
                 
+=======
+>>>>>>> Stashed changes
             </div>
+        </form>
+
+        <!-- LOGIN -->
+        <form action="/login" method="post" class="column is-one-third">
+            <div class="notification has-background-success-dark">
+
+                <h2 class="is-size-4">Login</h2>
+                <div class="field">
+                    <label class="label">Email</label>
+                    <p class="control has-icons-left
+                                has-icons-right">
+                        <input class="input" type="email" name="email" placeholder="Email">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-envelope"></i>
+                        </span>
+                        <span class="icon is-small is-right">
+                            <i class="fa fa-check"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <p class="control has-icons-left">
+                        <input class="input" type="password" name="password" placeholder="Password">
+                        <span class="icon is-small is-left">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <button class="button has-text-black">
+                            Login
+                        </button>
+                    </p>
+                </div>
+            </div>
+        </form>
+
+    </div>
 
 
-        </section>
+</section>
 
 
-    {% endblock content %}
-
-
+{% endblock content %}

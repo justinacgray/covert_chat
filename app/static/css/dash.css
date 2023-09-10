@@ -44,15 +44,12 @@ html {
     background-image: linear-gradient(to right, #2660A4  ,#00afb5);
     border-radius: 20px 20px 0px 0px;
     height: 40px;
-   
-   
   }
   .msger-header-title{
     display: flex;
     align-self: center;
     color: white;
   }
-  
   .msger-chat {
     flex: 1;
     overflow-y: auto;
@@ -82,13 +79,16 @@ html {
     border-radius: 0px 0px 20px 20px;
 
 }
+.active-msg-window{
+  height: 100%;
+  overflow-y: scroll;
+}
 
 .active-chat-list {
     border:1px;
     border-radius: 20px;
     background-color:#ffffff;
-    flex-grow: 2;
-    height: 100%;
+    flex-grow: 1;
     padding: 15px;
     margin: 15x;
 
@@ -101,20 +101,24 @@ html {
     height: 100%;
     padding: 15px;
     border-radius: 20px;
-
-
 }
+.container-height, .group-chat{
+  height: 90%;
+}
+
 .msger-inputarea {
     display: flex;
     padding: 10px;
+    border:1px;
+    border-radius: 20px;
     border-top: var(--border);
     background: #eee;
     margin: 20px 0px;
   }
   .msger-inputarea * {
     padding: 10px;
-    border: none;
-    border-radius: 3px;
+    border: 1px;
+    border-radius: 20px;
     font-size: 1em;
   }
   .msger-input {
@@ -122,19 +126,24 @@ html {
     background: #ddd;
   }
   .msger-send-btn {
-    margin-left: 10px;
-    background: rgb(0, 196, 65);
-    color: #fff;
     font-weight: bold;
     cursor: pointer;
+    background-color: #2660A4;
     transition: background 0.23s;
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
+    padding: 11px 20px; 
+    border: none;
+    margin-left: -1px;  
+    float: left;
   }
   .msger-send-btn:hover {
-    background: rgb(0, 180, 50);
+    background: #EEC643;
   }
 
 
-  /* directmessages */
+  /* direct messages */
 
 .fabutton {
   background: none;
@@ -167,7 +176,6 @@ html {
   font-size: 12px;
   margin-left: 10px;
 }
-
 
 .sender-msg {
   background-image: linear-gradient(to right, #DBCBD8 ,#98688f);
@@ -208,7 +216,7 @@ li.group1{
   justify-content: center;
   padding: 4px;
   border:1px solid transparent;
-  border-bottom: 1px solid #d5d5d5;
+  border-bottom: 1px solid #e6e4e4;
 }
 li.group1:hover{
   transform: scale(1.1);
@@ -217,7 +225,6 @@ li.group1:hover{
   border:1px;
   border-radius: 20px transparent;
   width: 99%;
-  border-bottom: 1px solid #475841;
 
 
 }
@@ -249,7 +256,7 @@ a:active, a.active {
 /* Chat Window */
 #chat{
   max-width: 100%;
-  height: 550px;
+  height: 100%;
   padding: 10px;
   border: 1px;
   border-radius: 10px;
@@ -372,5 +379,14 @@ input[type="checkbox"]:focus {
   background-color: #EEC643;
   height: 50px;
   margin-top:100px;
+  display: flex;
+  justify-content: center;
 
+}
+.footer-msg{
+  align-self: center;
+}
+
+.login-bg{
+  background-color: #c0c0c0;
 }
