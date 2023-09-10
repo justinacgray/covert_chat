@@ -36,11 +36,7 @@ class Message:
             return False
         # print("message created id", message_id)
         return True
-    
-    @classmethod
-    def read_one_message(cls):
-        pass
-    
+        
     
     # todo amend query below to includes likes to use that attribute length in the HTMl 
     @classmethod
@@ -143,7 +139,8 @@ class Message:
             flash("please choose a person to message")
             is_valid = False
         # == 0 must go OUTSIDE of the len function
-        if len(msg_content['content']) == 0:
+        #IMPORTANT!!! -> Using .strip prevents "Escape sequences" which can JSON parsing problems which means JS won't be able to grab your data correctly causing errors
+        if len(msg_content['content'].strip()) == 0:
             flash("content can't empty")
             is_valid = False
             

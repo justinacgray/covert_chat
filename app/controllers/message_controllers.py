@@ -58,10 +58,9 @@ def updateMessage(message_id):
     return redirect(f'/dm/{receiver_id}')
 
 
-@APP.route("/dm/delete/<int:message_id>")
+@APP.route("/dm/delete/<int:message_id>", methods=['POST'])
 def deleteMessage(message_id):
     if 'user_id' not in session:
         return redirect("/")
     message_model.Message.delete_message(message_id)
-    logged_user_message_id = request.form['replace']
-    return redirect(f'/dm/{logged_user_message_id}')
+    return redirect(f'/dm/{message_id}')

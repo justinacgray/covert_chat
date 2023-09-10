@@ -87,10 +87,18 @@ const updateMsg = (message_id, updated_input_json) => {
 }
 
 
-const openDeleteModal = (message_id) => {
-    console.log("open modal")
+const openDeleteModal = (message_id, message_content) => {
+    console.log("open modal with message id --->", message_id)
+    // parsed_data = JSON.parse(message_content)
+    console.log("JSON parse",message_content )
+    // if model is open
     if(modal) {
         console.log("message id", message_id)
+         // Find the modal elements to update
+        const messageContentElement = document.getElementById("message-content");
+
+         // Update the content in the modal
+        messageContentElement.textContent = message_content;
         modal.classList.add("is-active")
     }
     
@@ -104,24 +112,25 @@ const closeDeleteModal = () => {
 }
 
 // todo need to grab the message-id
-const deleteMessageById = () => {
-    const messageID = document.querySelector(`#contentMsg-${message_id}`);
+const deleteMessageById = (message_id) => {
+    // const messageID = document.querySelector(`#contentMsg-${message_id}`);
 
-    console.log(`/dm/delete/${receiverID.innerText}`)
-    console.log(messageID)
-    // fetch(`/dm/delete/${receiverID.innerText}`, {
-    //     method : "POST"
-    // })
-    // .then((response) => {
-    //     console.log("RESPONSE", response)
-    //     response.json()
-    //     closeDeleteModal()
-    //     // const recipe_row = document.getElementById(recipeID.innerText)
-    //     // recipe_row.remove()
-    // }) 
-    // .then((error) => {
-    //     console.log("ERROR", error)
-    // }) 
+    console.log(`/dm/delete/${message_id}`)
+    console.log(`message-${message_id}`)
+    fetch(`/dm/delete/${message_id}`, {
+        method : "POST"
+    })
+    .then((response) => {
+        console.log("RESPONSE", response)
+        response.json()
+        // closeDeleteModal()
+        const messageBubble = document.getElementById(`message-${message_id}`).id
+        console.log("message bubble id", messageBubble)
+        // messageBubble.remove()
+    }) 
+    .then((error) => {
+        console.log("#### ERROR ####", error)
+    }) 
 }
 
 

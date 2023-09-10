@@ -22,7 +22,7 @@
             
             {% if message_hist %}
             {% for message in message_hist %}
-            <main class="chat-container" >
+            <main class="chat-container" id="message-{{message.message_id}}" >
                 {% if session['user_id'] == message.sender_person_id %}
                 <div class='chat-bubble sender-msg' id='{{message.message_id}}'>
 
@@ -41,7 +41,7 @@
                     <span class="fa fa-pencil edit-button" data-message-id="{{message.message_id}}" title="Edit"></span>
 
 
-                    <span class="fa fa-trash" name="receiver_person_id" value="{{message.receiver_person_id}}" title="Delete" onclick="openDeleteModal('{{message.message_id}}')" id="delete-message-modal">
+                    <span class="fa fa-trash" name="receiver_person_id" value="{{message.receiver_person_id}}" title="Delete" onclick='openDeleteModal("message-{{message.message_id}}", "{{message.content}}")' id="delete-message-modal">
                     </span>
 
                     <form action="/dm/{{message.message_id}}" method= 'post' >
@@ -59,15 +59,17 @@
                     <div class="modal-background"></div>
                     <div class="modal-card">
                         <header class="modal-card-head">
-                            <p class="modal-card-title" id="delete_id"></p>
+                            <p class="modal-card-title" id="delete-id"></p>
                         <button class="delete" aria-label="close"></button>
                         </header>
                         <section class="modal-card-body">
                             <h3 class="subtitle mb-6">Are you sure you want to delete message?</h3>
+                            <input type="hidden" name="message_id" id="{{message.message_id}}" value="{{message.message_id}}">
+                            <p id="message-content"></p>
                         </section>
                         <footer class="modal-card-foot">
                             
-                            <button class="button is-danger" onclick="deleteMessageById()" >Yes, Delete</button>
+                            <button class="button is-danger" onclick="deleteMessageById('{{message.message_id}}')" >Yes, Delete</button>
 
                             <button class="button is-dark" onclick="closeDeleteModal()" >No, Cancel</button>
                         </footer>

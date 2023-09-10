@@ -117,19 +117,19 @@ class Person:
             print("This user exists")
             is_valid = False
         # data needs to be wrapped in parenthesis in order for it to be read
-        if len(register_data["first_name"]) < 2:
+        if len(register_data["first_name"].strip()) < 2:
             flash( "First Name must be at least 2 characters", category='error')
             print("first name error")
             is_valid = False
             
         #length of the last name
-        if len(register_data["last_name"]) < 2:
+        if len(register_data["last_name"].strip()) < 2:
             flash("Last Name ust be at least 2 characters", category='error')
             print("last name error")
             is_valid = False
             
         #length of age 
-        if len(register_data["age"]) == 0:
+        if len(register_data["age"].strip()) == 0:
             flash("Age mst be entered", category='error')
             print("age error")
             is_valid = False
@@ -141,13 +141,13 @@ class Person:
             is_valid = False
             
         #password was entered was less than 8
-        if len(register_data['password']) < 8:
+        if len(register_data['password'].strip()) < 8:
             flash("Password must be minimum 8 characters", category='error')
             print("password error")
             is_valid = False
             
         # password and confirm password must match 
-        if (register_data['password'] != register_data['confirm_password']):
+        if (register_data['password'].strip() != register_data['confirm_password'].strip()):
             flash("Passwords do not match", category='error')
             print("passwords do not match error")
             is_valid = False
@@ -173,11 +173,11 @@ class Person:
             flash('User does not exist', category='error')
             return False
         
-        if len(login_data['email']) == 0:
+        if len(login_data['email'].strip()) == 0:
             flash("Email must be entered", category='error')
             is_valid = False
             
-        if len(login_data['password']) == 0:
+        if len(login_data['password'].strip()) == 0:
             flash("Password must be entered", category='error')
             is_valid = False
         print("completed login validations")
