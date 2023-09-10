@@ -24,7 +24,7 @@
             {% for message in message_hist %}
             <main class="chat-container" id="message-{{message.message_id}}" >
                 {% if session['user_id'] == message.sender_person_id %}
-                <div class='chat-bubble sender-msg' id='{{message.message_id}}'>
+                <div class='chat-bubble sender-msg' id='{{message.message_id}}' data-message-id="message-{{message.message_id}}">
 
                     <!-- this span is not seen at first -->
                     <span style="display:none;" id="sender-message-{{message.message_id}}">
@@ -41,7 +41,7 @@
                     <span class="fa fa-pencil edit-button" data-message-id="{{message.message_id}}" title="Edit"></span>
 
 
-                    <span class="fa fa-trash" name="receiver_person_id" value="{{message.receiver_person_id}}" title="Delete" onclick='openDeleteModal("message-{{message.message_id}}", "{{message.content}}")' id="delete-message-modal">
+                    <span class="fa fa-trash" name="receiver_person_id" value="{{message.receiver_person_id}}" title="Delete" onclick='openDeleteModal("{{message.message_id}}", "{{message.content}}")' id="delete-message-modal">
                     </span>
 
                     <form action="/dm/{{message.message_id}}" method= 'post' >
@@ -69,7 +69,7 @@
                         </section>
                         <footer class="modal-card-foot">
                             
-                            <button class="button is-danger" onclick="deleteMessageById('{{message.message_id}}')" >Yes, Delete</button>
+                            <button class="button is-danger" id="delete-button">Yes, Delete</button>
 
                             <button class="button is-dark" onclick="closeDeleteModal()" >No, Cancel</button>
                         </footer>

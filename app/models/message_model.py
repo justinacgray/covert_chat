@@ -112,6 +112,7 @@ class Message:
         WHERE message_id = %(message_id)s
         ;"""
         result= MySQLConnection(cls.db).query_db(query, message_dict)
+        print("deleted message is ---->", result)
         return result
     
 

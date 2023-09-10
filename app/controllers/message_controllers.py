@@ -1,7 +1,7 @@
 from app import APP
 from flask import render_template, redirect, request, session, flash
 from app.models import person_model, message_model, group_model
-
+from flask import jsonify
 
 @APP.route("/dashboard")
 def user_dash():
@@ -62,5 +62,9 @@ def updateMessage(message_id):
 def deleteMessage(message_id):
     if 'user_id' not in session:
         return redirect("/")
-    message_model.Message.delete_message(message_id)
-    return redirect(f'/dm/{message_id}')
+    deleted_message = message_model.Message.delete_message(message_id)
+    # added this so I don't get an error
+    if deleted_message == None:
+        return jsonify({"success": True})
+    else:
+        return jsonify({"error": "Failed to delete message"}), 400

@@ -95,13 +95,21 @@ const openDeleteModal = (message_id, message_content) => {
     if(modal) {
         console.log("message id", message_id)
          // Find the modal elements to update
-        const messageContentElement = document.getElementById("message-content");
-
+        const messageContentElement = document.getElementById("message-content")
          // Update the content in the modal
-        messageContentElement.textContent = message_content;
+        messageContentElement.textContent = message_content
         modal.classList.add("is-active")
     }
-    
+    const deleteButton = document.getElementById("delete-button")   
+    deleteButton.addEventListener("click", () => {
+        // Check if the button inside the modal was clicked
+        if (event.target.id === "delete-button") {
+            console.log("msg id", message_id)
+            
+            // Your code for deleting the message goes here
+            deleteMessageById(message_id)
+        }
+    });
 }
 
 const closeDeleteModal = () => {
@@ -113,24 +121,26 @@ const closeDeleteModal = () => {
 
 // todo need to grab the message-id
 const deleteMessageById = (message_id) => {
-    // const messageID = document.querySelector(`#contentMsg-${message_id}`);
-
     console.log(`/dm/delete/${message_id}`)
-    console.log(`message-${message_id}`)
+    // console.log(`message-${message_id}`)
     fetch(`/dm/delete/${message_id}`, {
-        method : "POST"
+        method: "POST"
     })
     .then((response) => {
         console.log("RESPONSE", response)
-        response.json()
-        // closeDeleteModal()
-        const messageBubble = document.getElementById(`message-${message_id}`).id
+        return response.json()
+    })
+    .then((data) => {
+        console.log("Data", data)
+        closeDeleteModal()
+         // Make sure you're selecting the correct element here
+        const messageBubble = document.getElementById(`message-${message_id}`)
         console.log("message bubble id", messageBubble)
-        // messageBubble.remove()
-    }) 
-    .then((error) => {
-        console.log("#### ERROR ####", error)
-    }) 
+        messageBubble.remove()
+    })
+    .catch((error) => {
+        console.log("ERROR", error)
+    });
 }
 
 
