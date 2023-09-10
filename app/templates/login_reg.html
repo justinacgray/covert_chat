@@ -12,173 +12,39 @@
     {% endif %}
     {% endwith%}
     <div class="columns is-flex is-justify-content-center">
+        <div class="pen-title">
+            <span class="tooltip"><span class="tooltip-text">CLICK ME</span></span><span class="toggle"><i class='fa fa-paint-brush'></i></span>
+        </div>
 
-<<<<<<< Updated upstream
-                
-                <form action="/register" method="post" class="column is-one-third">
-                    <div class="notification has-background-grey-darker">
-                        <h2 class="is-size-4">Register</h2>
-                        <div class="field">
-                            <label class="label">First Name</label>
-                            <div class="control">
-                                <input 
-                                class="input" 
-                                type="text"
-                                name="first_name" 
-                                placeholder="First Name">
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label">Last Name</label>
-                            <div class="control">
-                                <input 
-                                class="input" 
-                                type="text"
-                                name="last_name" 
-                                placeholder="Last Name">
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label">Age</label>
-                            <div class="control">
-                                <input 
-                                class="input" 
-                                type="number"
-                                name="age" 
-                                placeholder="1">
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <label class="label">Email</label>
-                            <div class="control">
-                                <input 
-                                class="input" 
-                                type="email"
-                                name="email" 
-                                placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label">Username</label>
-                            <div class="control">
-                                <input 
-                                class="input" 
-                                type="text"
-                                name="username" 
-                                placeholder="Username">
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label">Password</label>
-                            <div class="control">
-                                <input 
-                                class="input" 
-                                type="password"
-                                name="password" 
-                                placeholder="Password">
-                            </div>
-                        </div>
-                        <div class="field">
-                            <label class="label">Confirm Password</label>
-                            <div class="control">
-                                <input 
-                                class="input" 
-                                type="password"
-                                name="confirm_password"
-                                placeholder="Confirm Password">
-                            </div>
-                        </div>
-                        <div class="field">
-                            <p class="control">
-                                <button class="button has-text-black">
-                                    Register
-                                </button>
-                            </p>
-                        </div>
-=======
->>>>>>> Stashed changes
-
-        <form action="/register" method="post" class="column is-one-third">
-        <div class="login-bg"
+        <form action="/register" method="post" class="column is-one-third register-form">
+            <div class="registration-bg">
                 <h2 class="is-size-4">Register</h2>
-                    <div class="control">
-                        <label class="label">First Name</label>
-                        <input class="input" type="text" name="first_name" placeholder="First Name">
-                        <label class="label">Last Name</label>
-                        <input class="input" type="text" name="last_name" placeholder="Last Name">
-                        <label class="label">Age</label>
-                        <input class="input" type="number" name="age" placeholder="1">
-                        <label class="label">Email</label>
-                        <input class="input" type="email" name="email" placeholder="Email">
-                        <label class="label">Username</label>
-                        <input class="input" type="text" name="username" placeholder="Username">
-                        <label class="label">Password</label>
-                        <input class="input" type="password" name="password" placeholder="Password">
-                        <label class="label">Confirm Password</label>
-                        <input class="input" type="password" name="confirm_password" placeholder="Confirm Password">
-                    </div>
-                        <button class="button has-text-black">
-                            Register
-                        </button>
-                    </p>
+                <div class="control">
+                    <label class="label">First Name</label>
+                    <input class="input" type="text" name="first_name" placeholder="First Name">
+                    <label class="label">Last Name</label>
+                    <input class="input" type="text" name="last_name" placeholder="Last Name">
+                    <label class="label">Age</label>
+                    <input class="input" type="number" name="age" placeholder="1">
+                    <label class="label">Email</label>
+                    <input class="input" type="email" name="email" placeholder="Email">
+                    <label class="label">Username</label>
+                    <input class="input" type="text" name="username" placeholder="Username">
+                    <label class="label">Password</label>
+                    <input class="input" type="password" name="password" placeholder="Password">
+                    <label class="label">Confirm Password</label>
+                    <input class="input" type="password" name="confirm_password" placeholder="Confirm Password">
                 </div>
-
-<<<<<<< Updated upstream
-                <!-- LOGIN -->
-                <form action="/login" method="post" class="column is-one-third">
-                    <div class="notification has-background-grey-darker">
-
-                        <h2 class="is-size-4">Login</h2>
-                        <div class="field">
-                            <label class="label">Email</label>
-                            <p class="control has-icons-left
-                                has-icons-right">
-                                <input 
-                                class="input" 
-                                type="email"
-                                name="email" 
-                                placeholder="Email">
-                                <span class="icon is-small is-left">
-                                    <i class="fa fa-envelope"></i>
-                                </span>
-                                <span class="icon is-small is-right">
-                                    <i class="fa fa-check"></i>
-                                </span>
-                            </p>
-                        </div>
-                        <div class="field">
-                            <label class="label">Password</label>
-                            <p class="control has-icons-left">
-                                <input 
-                                class="input" 
-                                type="password"
-                                name="password" 
-                                placeholder="Password">
-                                <span class="icon is-small is-left">
-                                    <i class="fa fa-lock"></i>
-                                </span>
-                            </p>
-                        </div>
-                        <div class="field">
-                            <p class="control">
-                                <button class="button has-text-black">
-                                    Login
-                                </button>
-                            </p>
-                        </div>
-                    </div>
-                </form>
-                
-=======
->>>>>>> Stashed changes
+                <button class="button has-text-white">
+                    Register
+                </button>
+                </p>
             </div>
         </form>
 
         <!-- LOGIN -->
-        <form action="/login" method="post" class="column is-one-third">
-            <div class="notification has-background-success-dark">
-
+        <form action="/login" method="post" class="column is-one-third login-form">
+            <div class="login-bg">
                 <h2 class="is-size-4">Login</h2>
                 <div class="field">
                     <label class="label">Email</label>
